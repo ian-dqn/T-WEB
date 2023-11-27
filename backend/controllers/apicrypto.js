@@ -26,6 +26,117 @@ exports.getApi = async (req, res, next) => {
     }
 };
 
+exports.getHistoryApiparDays = async (req, res, next) => {
+    const cryptoId = req.params.cryptoId;
+    const currency = req.params.currency;
+    const startDate = req.params.startDate; // Cette ligne capture le paramètre de date de début
+
+    try {
+        const response = await axios.get(
+            `https://api.coingecko.com/api/v3/coins/${cryptoId}/market_chart`,
+            {
+                params: {
+                    vs_currency: currency,
+                    from: startDate,
+                    days: 60, // ajustez cette valeur en fonction de vos besoins
+                },
+            }
+        );
+
+        const data = response.data;
+        const history = {
+            prices: data.prices.map((entry) => entry[1]),
+        };
+
+        console.log("Fetched history successfully:", history);
+
+        res.json(history);
+    } catch (error) {
+        console.error("Error fetching price history:", error);
+        res.status(500).json({ error: "Error fetching price history" });
+    }
+};
+
+exports.getHistoryApiparHeure = async (req, res, next) => {
+    const cryptoId = req.params.cryptoId;
+    const currency = req.params.currency;
+    //  const startDate = req.params.startDate;
+    const api_key = "CG-ktjj2Hs8Q21XTLe1DCud6LGV";
+
+    try {
+        // Utilisation de la bonne URL pour obtenir l'historique des prix
+        const response = await axios.get(
+            `https://api.coingecko.com/api/v3/coins/${cryptoId}/market_chart`,
+            {
+                params: {
+                    vs_currency: currency,
+                    //  days: 1, // Vous pouvez ajuster cette valeur en fonction de vos besoins
+                    interval: "48h",
+                    api_key: api_key,
+                },
+            }
+        );
+
+        const data = response.data;
+
+        // Vérification si les données des prix sont disponibles
+        if (data.prices && data.prices.length > 0) {
+            const history = {
+                prices: data.prices.map((entry) => entry[1]),
+            };
+
+            console.log("Fetched history successfully:", history);
+
+            res.json(history);
+        } else {
+            console.error("Prices data not available");
+            res.status(500).json({ error: "Prices data not available" });
+        }
+    } catch (error) {
+        console.error("Error fetching price history:", error);
+        res.status(500).json({ error: "Error fetching price history" });
+    }
+};
+exports.getHistoryApiparMinute = async (req, res, next) => {
+    const cryptoId = req.params.cryptoId;
+    const currency = req.params.currency;
+    //  const startDate = req.params.startDate;
+    const api_key = "CG-ktjj2Hs8Q21XTLe1DCud6LGV";
+
+    try {
+        // Utilisation de la bonne URL pour obtenir l'historique des prix
+        const response = await axios.get(
+            `https://api.coingecko.com/api/v3/coins/${cryptoId}/market_chart`,
+            {
+                params: {
+                    vs_currency: currency,
+                    //  days: 1, // Vous pouvez ajuster cette valeur en fonction de vos besoins
+                    interval: "60m",
+                    api_key: api_key,
+                },
+            }
+        );
+
+        const data = response.data;
+
+        // Vérification si les données des prix sont disponibles
+        if (data.prices && data.prices.length > 0) {
+            const history = {
+                prices: data.prices.map((entry) => entry[1]),
+            };
+
+            console.log("Fetched history successfully:", history);
+
+            res.json(history);
+        } else {
+            console.error("Prices data not available");
+            res.status(500).json({ error: "Prices data not available" });
+        }
+    } catch (error) {
+        console.error("Error fetching price history:", error);
+        res.status(500).json({ error: "Error fetching price history" });
+    }
+};
 exports.getApiId = async (req, res) => {
     const cryptoId = req.params.id;
 
