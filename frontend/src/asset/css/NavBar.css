@@ -1,0 +1,40 @@
+.navbar {
+    padding: 10px 0px;
+    border-block: 1px solid #777;
+    background: #0d1421 !important;
+}
+
+.navbar .nav-ins {
+    width: 100px;
+    background-color: #3861fb;
+    text-align: center;
+    padding: 7px 0px;
+    border-radius: 7px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.navbar .nav-ins:hover {
+    background-color: #0d1421;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.navbar .nav-conn {
+    width: 120px;
+    border: 1px solid #fff;
+    text-align: center;
+    padding: 7px 0px;
+    border-radius: 7px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 400;
+    margin-right: 10px;
+}
+
+.navbar .nav-conn:hover {
+    background-color: #3861fb;
+    color: #fff;
+    border: none;
+}

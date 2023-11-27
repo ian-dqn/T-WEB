@@ -1,0 +1,153 @@
+.info h1 {
+    color:#fff;
+    font-size: 30px !important;
+    font-weight: 500 !important;
+    margin-bottom: 10px !important;
+}
+.info p {
+    margin-top: 5px;
+    color: #777;
+    font-size: 15px;
+   word-spacing: 1.5px;
+   font-weight: 300;
+   line-height: 1.5;
+   
+}
+.info p span:first-child {
+    color: #15bc7e;
+    font-weight: 600;
+}
+.swichBtn {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 10px;
+}
+.carousel .carousel-indicators button {
+    width: 10px;
+   height: 10px;
+   border-radius: 100%;
+ }
+.carousel-item {
+    width: 360px;
+    background-color: #222531;
+    height: 200px;
+    color: #fff;
+    z-index: -1;
+    position: relative;
+}
+  
+.carousel-item .titre {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+}
+.carousel-item .titre span {
+    margin-left: 15px;
+    font-weight: 600;
+}
+.carousel-item .titre .fa-clock {
+    color: #58667e;
+}
+.carousel-item .plus {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+}
+.carousel-item .plus span {
+    margin-right: 15px;
+    font-weight: 300;
+}
+.carousel-item .plus span,.carousel-item .plus .fa-arrow-right {
+    color: #0d6efd !important;
+}
+.box-caruse {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  margin-top: 20px;
+}
+.box-caruse .info {
+   width: 50%;
+   margin-top: 20px;
+}
+.box-caruse .numbers {
+    margin: 20px 20px 0px 0px ;
+}
+.box-caruse .text-number {
+    margin: 20px 10px 0px 0px ;
+}
+.box-caruse .numbers h5 {
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+.box-caruse .box {
+    display: flex;
+    margin: 10px 20px;
+    align-items: center;
+}
+
+.img-info {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 100% !important;
+    margin: 0px 20px;
+}
+.fa-star {
+    color: gold;
+}
+.text-gold span {
+    font-size: 15px;
+    font-weight: 500;
+}
+.btn-text {
+    display: block;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.fa-certificate {
+    color: #0d6efd;
+}
+.box span {
+   margin-left: 10px;
+   color: #58667e;
+   font-size: 13px;
+   font-weight: 300;
+}
+.graph{
+    width: 360px;
+    background-color: #222531;
+    height: 200px;
+    color: #fff;
+    position: relative;
+}
+.graph svg ,.graph span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  transform: translate(-50%, -50%);
+ display: block;
+
+}
+.graph span  {
+   margin-top: 30px;
+}
+.graph .total {
+    display: block;
+    top: 40%;
+    transform: translate(-40%, -50%);
+    font-weight: 900;
+    font-size: 40px;
+    padding-bottom: 20px;
+}
+table {
+    background-color: transparent !important;
+}
+table tr ,th ,td {
+    background-color: transparent !important;
+    color: #fff !important;
+}
