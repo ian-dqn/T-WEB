@@ -9,7 +9,7 @@ function Table() {
   useEffect(() => {
     const myData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/articles');
+        const response = await axios.get('http://localhost:5000/api/articles');
        
         setArticles(response.data)
        
@@ -38,13 +38,21 @@ function Table() {
   </thead>
   <tbody>
     {
-      articles.map(article=>(
-        <tr>
-        <th scope="row" key={article}>1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+      articles.items.map((item, index) => (
+          <div>
+            <tr>
+        <th scope="row" key={item}>{item.title}</th>
+        <td>{item.pubDate}</td>
+        <td>{item.description}</td>
+        <td>{item.categories.join(', ')}</td>
       </tr>
+
+            {/* <h2>{item.title}</h2>
+            <p>Link: <a href={item.link} target="_blank" rel="noopener noreferrer">{item.link}</a></p>
+            <p>Published Date: {item.pubDate}</p>
+            <p>Description: {item.description}</p>
+            <p>Categories: {item.categories.join(', ')}</p> */}
+          </div>
       )
    
       )
