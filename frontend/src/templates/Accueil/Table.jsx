@@ -1,9 +1,32 @@
-import React from 'react'
+import React ,{ useState,useEffect }  from 'react'
 import '../../asset/css/Accueil.css'
+import axios from 'axios';
 
 function Table() {
+  const [articles, setArticles] = useState([]);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const myData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/articles');
+       
+        setArticles(response.data)
+       
+        setError(false)
+      } catch (error) {
+        console.log(error);
+        setError(true)
+      }
+
+    }
+    myData();
+  }, [])
+ 
   return (
+  
     <div>
+  
       <table class="table bg-dark">
   <thead>
     <tr>
@@ -14,25 +37,28 @@ function Table() {
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      
-      <td>@twitter</td>
-    </tr>
+    {
+      articles.items.map((item, index) => (
+          <div>
+            <tr>
+        <th scope="row" key={item}>{item.title}</th>
+        <td>{item.pubDate}</td>
+        <td>{item.description}</td>
+        <td>{item.categories.join(', ')}</td>
+      </tr>
+
+            {/* <h2>{item.title}</h2>
+            <p>Link: <a href={item.link} target="_blank" rel="noopener noreferrer">{item.link}</a></p>
+            <p>Published Date: {item.pubDate}</p>
+            <p>Description: {item.description}</p>
+            <p>Categories: {item.categories.join(', ')}</p> */}
+          </div>
+      )
+   
+      )
+    }
+ 
+
   </tbody>
 </table>
     </div>

@@ -7,7 +7,8 @@ import img4 from "../asset/img/5426.png";
 import A from '../asset/img/A.png'
 import B from '../asset/img/B.png'
 import C from '../asset/img/c.jpg'
-import Table from '../templates/Accueil/Table';
+// import Table from '../templates/Accueil/Table';
+import DisplayArticle from '../templates/Accueil/Articles';
 
 
 function Accueil() {
@@ -230,7 +231,8 @@ function Accueil() {
                     </div>
                 </div>
                 <div className="row mt-5">
-                  <Table />
+                  {/* <Table /> */}
+                  <DisplayArticle />
                 </div>
             </div>
         </>
