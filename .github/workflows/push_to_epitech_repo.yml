@@ -18,6 +18,6 @@ jobs:
         git config user.name "ian-dqn"
         git config user.email "ian.duquennoi@epitech.eu"
         git remote add T-WEB-700-PAR_30 https://github.com/EpitechMscProPromo2025/T-WEB-700-PAR_30.git
-        git push EpitechRepo main
+        git push T-WEB-700-PAR_30 main
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
