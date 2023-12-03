@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  push_to_repoB:
+  push_to_EpitechRepo:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,7 +16,7 @@ jobs:
     - name: Push to EpitechRepo
       run: |
         git config user.name "ian-dqn"
-        git config user.email "ian.duquennoi@gmail.com"
+        git config user.email "ian.duquennoi@epitech.eu"
         git remote add EpitechRepo https://github.com/EpitechMscProPromo2025/T-WEB-700-PAR_30.git
         git push EpitechRepo main
       env:
