@@ -1,0 +1,23 @@
+name: Push to EpitechRepo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  push_to_repoB:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout OriginalRepo
+      uses: actions/checkout@v2
+
+    - name: Push to EpitechRepo
+      run: |
+        git config user.name "ian-dqn"
+        git config user.email "ian.duquennoi@gmail.com"
+        git remote add EpitechRepo https://github.com/EpitechMscProPromo2025/T-WEB-700-PAR_30.git
+        git push EpitechRepo main
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
