@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
 import '../../asset/css/LoginUser.css';
 
 const LoginUser = () => {
@@ -7,15 +8,18 @@ const LoginUser = () => {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+    // Use useNavigate for navigation
+    const navigate = useNavigate();
+
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
-        // Effacez le message d'erreur lorsqu'un champ est modifié
+        // Clear the error message when a field is modified
         setErrorMessage('');
     };
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
-        // Effacez le message d'erreur lorsqu'un champ est modifié
+        // Clear the error message when a field is modified
         setErrorMessage('');
     };
 
@@ -27,16 +31,18 @@ const LoginUser = () => {
                 email,
                 password,
             });
-
-            console.log('Réponse du serveur:', response.data);
-
-            // Si la connexion réussit, ajoutez ici le traitement supplémentaire, par exemple, rediriger l'utilisateur, mettre à jour l'état, etc.
+            // Store the token in localStorage
+            localStorage.setItem('token', response.data.token);
+            console.log('Server response:', response.data);
+            // Redirect the user to the home page
+            navigate('/');
+            window.location.reload();
 
         } catch (error) {
-            console.error('Erreur lors de la requête API:', error.message);
+            console.error('Error in API request:', error.message);
 
-            // Si la connexion échoue, affichez le message d'erreur
-            setErrorMessage('Identifiants invalides. Veuillez réessayer.');
+            // If login fails, display the error message
+            setErrorMessage('Invalid credentials. Please try again.');
         }
     };
 
@@ -54,7 +60,7 @@ const LoginUser = () => {
                     required
                 />
 
-                <label htmlFor="password">Mot de passe:</label>
+                <label htmlFor="password">Password:</label>
                 <input
                     type="password"
                     id="password"
@@ -64,7 +70,7 @@ const LoginUser = () => {
                     required
                 />
 
-                <button type="submit">Se connecter</button>
+                <button type="submit">Login</button>
             </form>
         </div>
     );
