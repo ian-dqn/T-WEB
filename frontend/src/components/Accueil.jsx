@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import '../asset/css/Accueil.css'
 import img1 from "../asset/img/23930.png";
-// import img2 from "../asset/img/28467.png";
 import img3 from "../asset/img/28468.png";
 import img4 from "../asset/img/5426.png";
 import A from '../asset/img/A.png'
 import B from '../asset/img/B.png'
 import C from '../asset/img/c.jpg'
-// import Table from '../templates/Accueil/Table';
+import Table from '../templates/Accueil/Table';
 import DisplayArticle from '../templates/Accueil/Articles';
 
 
@@ -30,20 +29,6 @@ function Accueil() {
                             La capitalisation boursière globale du marché crypto est de €1.3T,
                             soit une augmentation de <span><i className="fa-solid fa-arrow-up"></i> 1.62%</span> <span>au cours des dernières 24 heures. Lire plus</span>
                         </p>
-                    </div>
-                    <div className="col-md-4 swichBtn">
-                        <span>Essentiels</span>
-                        <div className="form-check form-switch">
-                            {/* Use the state variable and the onChange handler */}
-                            <input
-                                className="form-check-input"
-                                type="checkbox"
-                                role="switch"
-                                id="flexSwitchCheckChecked"
-                                checked={isChecked}
-                                onChange={handleCheckboxChange}
-                            />
-                        </div>
                     </div>
                 </div>
                 <div className="row mt-5">
@@ -231,7 +216,7 @@ function Accueil() {
                     </div>
                 </div>
                 <div className="row mt-5">
-                  {/* <Table /> */}
+                   <Table  />
                   <DisplayArticle />
                 </div>
             </div>
