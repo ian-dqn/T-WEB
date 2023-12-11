@@ -33,6 +33,7 @@ const LoginUser = () => {
             });
             // Store the token in localStorage
             localStorage.setItem('user',JSON.stringify(response.data.user));
+            localStorage.setItem('data',JSON.stringify(response.data));
             console.log('Server response:', response.data);
             // Redirect the user to the home page
             navigate('/');
