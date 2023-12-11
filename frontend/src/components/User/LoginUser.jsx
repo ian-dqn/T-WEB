@@ -32,7 +32,7 @@ const LoginUser = () => {
                 password,
             });
             // Store the token in localStorage
-            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('user',JSON.stringify(response.data.user));
             console.log('Server response:', response.data);
             // Redirect the user to the home page
             navigate('/');
