@@ -49,6 +49,8 @@ const LoginUser = () => {
     return (
         <div className="login-container">
             {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <h1>  Connexion  </h1>
+
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">E-mail:</label>
                 <input

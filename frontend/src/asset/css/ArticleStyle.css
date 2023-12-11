@@ -14,6 +14,12 @@
     background-color: #444;
     cursor: pointer;
   }
+
+    .article-container {
+        display: flex;  /* Utilisation de Flexbox pour afficher les éléments en ligne */
+        justify-content: space-between;  /* Espacement équitable entre les éléments */
+        flex-wrap: wrap;  /* Permet le retour à la ligne si l'espace est insuffisant */
+    }
   
   /* Media query for screens larger than 768px */
   /* @media (min-width: 768px) {
