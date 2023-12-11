@@ -32,7 +32,7 @@ const LoginUser = () => {
                 password,
             });
             // Store the token in localStorage
-            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('user',JSON.stringify(response.data.user));
             console.log('Server response:', response.data);
             // Redirect the user to the home page
             navigate('/');
@@ -49,6 +49,8 @@ const LoginUser = () => {
     return (
         <div className="login-container">
             {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <h1>  Connexion  </h1>
+
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">E-mail:</label>
                 <input
