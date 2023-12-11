@@ -63,7 +63,15 @@ function NavBar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <div className="navbar-nav mx-auto">
-                        {/* ... (existing code) */}
+                        <a className="nav-item nav-link active ms-5" href="#">
+                            Cryptomonnaies <span className="sr-only">(current)</span>
+                        </a>
+                        <a className="nav-item nav-link ms-5" href="#">
+                            Échanges
+                        </a>
+                        <a className="nav-item nav-link ms-5" href="/news">
+                            Actualités
+                        </a>
                     </div>
 
                     {localStorage.getItem('user') ? (
