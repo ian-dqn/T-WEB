@@ -1,6 +1,8 @@
     .article-box {
-    width: 100%; 
-    margin: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    margin: 2% 4% 2% 4%;
+    box-sizing: border-box;
     padding: 10px;
     background-color: #222531;
     /* #333; */
@@ -9,11 +11,25 @@
     border-radius: 8px;
     transition: background-color 0.3s ease;
   }
-  
+
   .article-box:hover {
     background-color: #444;
     cursor: pointer;
   }
+
+    .article-container {
+        display: flex;  /* Utilisation de Flexbox pour afficher les éléments en ligne */
+        justify-content: space-between;  /* Espacement équitable entre les éléments */
+        flex-wrap: wrap;  /* Permet le retour à la ligne si l'espace est insuffisant */
+    }
+
+    h1{
+        margin: 2% 4% 1% 4%;
+    }
+
+    h4{
+        font-weight: bold;
+    }
   
   /* Media query for screens larger than 768px */
   /* @media (min-width: 768px) {
