@@ -1,7 +1,9 @@
 import useFetch from "../../hooks/useFetch";
 import '../../asset/css/ArticleStyle.css';
 
-function DisplayArticle() {
+function DisplayArticle({user}) {
+    console.log(user)
+    // if (user.news) {}
     const { data, loading, error, reFetch } = useFetch('http://localhost:5000/api/articles');
 
     return (

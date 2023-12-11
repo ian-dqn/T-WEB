@@ -3,7 +3,15 @@ let parser = new Parser();
 
 exports.getArticles = async (req, res) => {    
   try {
-    const feedUrl = 'https://coinjournal.net/fr/actualites/feed/';
+    let category
+    if (req.body.preferences) {
+      category = `actualites/category/${req.preferences}`
+    } else {
+      category = 'actualites'
+    }
+    const feedUrl = `https://coinjournal.net/fr/${category}/feed/`;
+
+    
     const feed = await parser.parseURL(feedUrl);
 
     // Extract the relevant information from the feed
