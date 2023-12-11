@@ -3,9 +3,9 @@ import '../../asset/css/NavBar.css';
 
 function NavBar() {
     const handleLogout = () => {
-        // Add any additional logout logic here, e.g., clearing local storage
+        // Ajoutez toute logique de déconnexion supplémentaire ici, par exemple, effacer le stockage local
         localStorage.removeItem('token');
-        // Redirect to the login page and refresh the page
+        // Redirigez vers la page de connexion et actualisez la page
         window.location.href = '/login';
     };
 
@@ -36,12 +36,17 @@ function NavBar() {
                         <a className="nav-item nav-link ms-5" href="#">
                             Échanges
                         </a>
-                        <a className="nav-item nav-link ms-5" href="#">
+                        <a className="nav-item nav-link ms-5" href="/news">
                             Actualités
                         </a>
                         <a className="nav-item nav-link ms-5" href="#">
                             Portefeuille
                         </a>
+                        {localStorage.getItem('token') && (
+                            <a className="nav-item nav-link ms-5" href="/profile">
+                                Mon Profil
+                            </a>
+                        )}
                     </div>
 
                     {localStorage.getItem('token') ? (
