@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../../asset/css/RegisterUser.css';
+import { newsOptions } from '../../constants/userPreferencesOptions'; 
 import { useNavigate } from 'react-router-dom';
-import '../../asset/css/RegisterUser.css'; // Assurez-vous d'importer le fichier CSS approprié
 
 const RegisterUser = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [cryptoParams, setCryptoParams] = useState([]);
+    const [newsParams, setNewsParams] = useState([]); 
     const [errorMessage, setErrorMessage] = useState('');
 
     const navigate = useNavigate();
@@ -21,6 +24,16 @@ const RegisterUser = () => {
         setErrorMessage('');
     };
 
+    const handleCryptoParamsChange = (e) => {
+        const selectedCryptoParams = Array.from(e.target.selectedOptions, (option) => option.value);
+        setCryptoParams(selectedCryptoParams);
+    };
+
+    const handleNewsParamsChange = (e) => {
+        const selectedNewsParams = Array.from(e.target.selectedOptions, (option) => option.value);
+        setNewsParams(selectedNewsParams);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -28,6 +41,8 @@ const RegisterUser = () => {
             const response = await axios.post('http://localhost:5000/api/auth/signup', {
                 email,
                 password,
+                cryptoParams,
+                newsParams,
             });
 
             console.log('Réponse du serveur:', response.data);
@@ -67,6 +82,20 @@ const RegisterUser = () => {
                     onChange={handlePasswordChange}
                     required
                 />
+
+                <label htmlFor="newsParams">Selctionnez vos préférences:</label>
+                <select
+                    multiple
+                    id="newsParams"
+                    name="newsParams"
+                    onChange={handleNewsParamsChange}
+                >
+                    {newsOptions.map((option) => (
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
+                </select>
 
                 <button type="submit">S'inscrire</button>
             </form>
