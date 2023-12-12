@@ -5,8 +5,6 @@ import { newsOptions } from '../../constants/userPreferencesOptions';
 
 const animatedComponents = makeAnimated();
 
-// Convert the array of strings to an array of objects
-
 const customStyles = {
     option: (provided, state) => ({
       ...provided,
@@ -14,7 +12,7 @@ const customStyles = {
     }),
   };
   
-  const MyComponent = () => (
+  const selectUserPref = () => (
     <Select
       closeMenuOnSelect={false}
       components={animatedComponents}
@@ -24,4 +22,4 @@ const customStyles = {
     />
   )
 
-  export default MyComponent;
+  export default selectUserPref;

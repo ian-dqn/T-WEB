@@ -23,16 +23,6 @@ const LoginUser = () => {
         setErrorMessage('');
     };
 
-    const handleCryptoParamsChange = (e) => {
-        const selectedCryptoParams = Array.from(e.target.selectedOptions, (option) => option.value);
-        setCryptoParams(selectedCryptoParams);
-    };
-
-    const handleNewsParamsChange = (e) => {
-        const selectedNewsParams = Array.from(e.target.selectedOptions, (option) => option.value);
-        setNewsParams(selectedNewsParams);
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -40,13 +30,9 @@ const LoginUser = () => {
             const response = await axios.post('http://localhost:5000/api/auth/login', {
                 email,
                 password,
-                cryptoParams,
-                newsParams,
             });
             // Store the token in localStorage
             localStorage.setItem('user',JSON.stringify(response.data.user));
-            localStorage.setItem('data',JSON.stringify(response.data));
-            localStorage.setItem('data',JSON.stringify(response.data));
             localStorage.setItem('data',JSON.stringify(response.data));
             console.log('Server response:', response.data);
             // Redirect the user to the home page
