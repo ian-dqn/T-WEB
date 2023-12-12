@@ -6,8 +6,6 @@ import img4 from "../asset/img/5426.png";
 import A from '../asset/img/A.png'
 import B from '../asset/img/B.png'
 import C from '../asset/img/c.jpg'
-import Table from '../templates/Accueil/Table';
-import DisplayArticle from '../templates/News/Articles';
 import CryptoCurrencies from "../templates/Accueil/crypt";
 
 

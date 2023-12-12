@@ -5,8 +5,8 @@ const userSchema = mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     // We want array of strings
-    crypto: { type: [String], required: false },
-    news: { type: [String], required: false }
+    crypto: { type: [String], required: false, default:[] },
+    articlesPrefs: { type: [String], required: false , default: [] }
 });
 
 userSchema.plugin(uniqueValidator);
