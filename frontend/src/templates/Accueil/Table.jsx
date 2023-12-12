@@ -34,7 +34,7 @@ function Table() {
                           <td>{item.current_price} $</td>
                           <td>{(item.price_change_percentage_24h/24).toFixed(2)}</td>
                           <td>{item.price_change_percentage_24h.toFixed(2)}</td>
-                          <td>{(item.price_change_percentage_24h *7).toFixed(2)}</td>
+                          <td>{(item.price_change_percentage_24h).toFixed(2)}</td>
 
                       </tr>
 

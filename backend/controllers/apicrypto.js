@@ -26,6 +26,60 @@ exports.getApi = async (req, res, next) => {
     }
 };
 
+exports.getApi50 = async (req, res, next) => {
+    try {
+        const itemsPerPage = 10; // Nombre d'éléments par page
+        const totalPages = 2; // Nombre total de pages que vous souhaitez récupérer
+
+        let allData = [];
+
+        for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
+            // Faites une requête pour obtenir la liste des 50 meilleures cryptomonnaies
+            const topCryptosResponse = await axios.get(
+                "https://api.coingecko.com/api/v3/coins/markets",
+                {
+                    params: {
+                        vs_currency: "usd",
+                        order: "market_cap_desc",
+                        per_page: itemsPerPage,
+                        page: currentPage,
+                        sparkline: false,
+                    },
+                }
+            );
+
+            // Extrait les IDs de la réponse
+            const cryptoIds = topCryptosResponse.data.map(crypto => crypto.id);
+
+            // Faites la requête principale en utilisant les IDs obtenus
+            const mainResponse = await axios.get(
+                "https://api.coingecko.com/api/v3/coins/markets",
+                {
+                    params: {
+                        vs_currency: "usd",
+                        ids: cryptoIds.join(','), // Joindre les IDs dans une chaîne séparée par des virgules
+                        order: "market_cap_desc",
+                        per_page: itemsPerPage,
+                        page: currentPage,
+                        sparkline: false,
+                    },
+                }
+            );
+
+            // Ajoutez les données de la page actuelle à la liste globale
+            allData = [...allData, ...mainResponse.data];
+        }
+
+        // Envoyez les données en tant que JSON dans la réponse
+        res.json(allData);
+    } catch (error) {
+        // Gérez les erreurs
+        console.error(error);
+        res.status(500).json({ error: "Error fetching cryptocurrency data" });
+    }
+};
+
+
 exports.getHistoryApiparDays = async (req, res, next) => {
     const cryptoId = req.params.cryptoId;
     const currency = req.params.currency;
