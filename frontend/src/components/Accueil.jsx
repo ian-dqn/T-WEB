@@ -6,13 +6,14 @@ import img4 from "../asset/img/5426.png";
 import A from '../asset/img/A.png'
 import B from '../asset/img/B.png'
 import C from '../asset/img/c.jpg'
-import Table from '../templates/Accueil/Table';
+import CryptoCurrencies from "../templates/Accueil/crypt";
+
 
 function Accueil() {
     // Use state to track the checked state
     const [isChecked, setIsChecked] = useState(true);
     const user = localStorage.getItem('token') ;
-  
+
     // Define an onChange handler to update the state when the checkbox is clicked
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
@@ -215,7 +216,7 @@ function Accueil() {
                     </div>
                 </div>
                 <div className="row mt-5">
-                   <Table  />
+                   <CryptoCurrencies  />
                 </div>
             </div>
         </>
