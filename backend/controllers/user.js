@@ -66,7 +66,7 @@ exports.putUser = (req, res, next) => {
     const userId = req.params.id;
 
     // Exemple : Récupération du nouveau mot de passe depuis le corps de la requête
-    const { newPassword } = req.body;
+    const newPassword = req.body.password;
 
 
     // Hasher le nouveau mot de passe avant de le stocker
