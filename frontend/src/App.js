@@ -5,17 +5,25 @@ import LoginUser from "./components/User/LoginUser";
 import RegisterUser from "./components/User/RegisterUser";
 import News from "../src/templates/News/Articles";
 
-
-
-
 function App() {
+  const userString = localStorage.getItem('user');
+  const user = JSON.parse(userString);
+  const Pref = ({children}) => {
+    const userString = localStorage.getItem('user');
+    const user = JSON.parse(userString);
+    // console.log(user.news.length)
+    if (user) {
+      return user
+    }
+    return children
+  };
   return (
     <div className="App">
       <BrowserRouter>
         <NavBar />
       <Routes>
-        <Route path='/' element={<Accueil />} />
-          <Route path='/news' element={<News />} />
+        <Route path='/' element={<Accueil/>} />
+          <Route path='/news' element={<News user={user} />} />
         <Route path='/login' element={<LoginUser />} />
         <Route path='/register' element={<RegisterUser />} />
       </Routes>
