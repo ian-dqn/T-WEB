@@ -12,8 +12,6 @@ exports.signup = (req, res, next) => {
             const user = new User({
                 email: req.body.email,
                 password: hash,
-                // crypto: req.body.crypto,
-                // news: req.body.news
             });
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -42,7 +40,6 @@ exports.login = (req, res, next) => {
                             { expiresIn: '24h' }
                         ),
                         mail: user.email,
-                        // newsPref: user.news
                     });
                 })
                 .catch(error => res.status(500).json({ error }));
