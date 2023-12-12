@@ -66,7 +66,7 @@ exports.putUser = (req, res, next) => {
     const userId = req.params.id;
 
     // Exemple : Récupération du nouveau mot de passe depuis le corps de la requête
-    const { newPassword, newPreferences } = req.body;
+    const { newPassword } = req.body;
 
 
     // Hasher le nouveau mot de passe avant de le stocker
@@ -75,7 +75,7 @@ exports.putUser = (req, res, next) => {
             // Utilisez le mot de passe haché pour mettre à jour l'utilisateur
             User.findByIdAndUpdate(
                 userId,
-                { password: hashedPassword, articlesPrefs: newPreferences },
+                { password: hashedPassword },
                 { new: true, runValidators: true }
             )
                 .then((updatedUser) => {
