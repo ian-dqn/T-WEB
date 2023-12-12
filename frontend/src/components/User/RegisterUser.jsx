@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../asset/css/RegisterUser.css';
 import { newsOptions } from '../../constants/userPreferencesOptions'; 
 import { useNavigate } from 'react-router-dom';
+import MyComponent from './newsPreferences'
 
 const RegisterUser = () => {
     const [email, setEmail] = useState('');
@@ -84,8 +85,7 @@ const RegisterUser = () => {
                 />
 
                 <label htmlFor="newsParams">Selctionnez vos préférences:</label>
-                <select
-                    multiple
+                {/* <makeAnimated
                     id="newsParams"
                     name="newsParams"
                     onChange={handleNewsParamsChange}
@@ -95,7 +95,9 @@ const RegisterUser = () => {
                             {option}
                         </option>
                     ))}
-                </select>
+                </makeAnimated> */}
+
+                <MyComponent />
 
                 <button type="submit">S'inscrire</button>
             </form>
