@@ -83,20 +83,6 @@ const RegisterUser = () => {
                     required
                 />
 
-                {/* <label htmlFor="cryptoParams">Selectionnez vos cryptomonnaies:</label>
-                <select
-                    multiple
-                    id="cryptoParams"
-                    name="cryptoParams"
-                    onChange={handleCryptoParamsChange}
-                >
-                    {cryptoOptions.map((option) => (
-                        <option key={option} value={option}>
-                            {option}
-                        </option>
-                    ))}
-                </select> */}
-
                 <label htmlFor="newsParams">Selctionnez vos préférences:</label>
                 <select
                     multiple
