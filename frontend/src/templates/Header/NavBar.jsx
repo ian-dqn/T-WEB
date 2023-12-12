@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import '../../asset/css/NavBar.css';
+import {Link} from 'react-router-dom'
 import Edit from '../../components/User/Edit'; // Assurez-vous de spécifier le bon chemin pour le fichier Edit
 
 function NavBar() {
-    const [editMode, setEditMode] = useState(false);
-    const [newPassword, setNewPassword] = useState('');
+
     const userString = localStorage.getItem('user');
     const user = JSON.parse(userString);
 
@@ -14,43 +14,8 @@ function NavBar() {
         window.location.href = '/login';
     };
 
-    const handleSaveEdit = () => {
-        const userId = user._id;
-        console.log(user)
-      
-        const dataString = localStorage.getItem('data');
-        const data = JSON.parse(dataString);
-        const token = data.token
-        console.log(data)
-        console.log(token)
+    
 
-        // Send a request to update the user information on the server using Axios
-        axios.put(`http://localhost:5000/api/auth/${userId}`, {
-            password: newPassword,
-        },   {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            },
-        })
-        .then(response => {
-            console.log('User updated successfully', response.data);
-            setEditMode(false);
-            setNewPassword('');
-            // You may want to update the user information in the state here
-        })
-        .catch(error => {
-            console.error('Error updating user', error);
-        });
-    };
-
-    // ... (rest of the component)
-
-
-    const handleCancelEdit = () => {
-        setEditMode(false);
-        setNewPassword('');
-    };
 
     return (
         <>
@@ -81,15 +46,7 @@ function NavBar() {
                                     <span><b className='be-2'>Bonjour</b> <span className='text-danger'>{user.email}</span></span>
                                 </a>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    {/* Incorporate the Edit component */}
-                                    <Edit
-                                        editMode={editMode}
-                                        setEditMode={setEditMode}
-                                        newPassword={newPassword}
-                                        setNewPassword={setNewPassword}
-                                        handleSaveEdit={handleSaveEdit}
-                                        handleCancelEdit={handleCancelEdit}
-                                    />
+                                    <li><Link to={`/Edit/${user._id}`}>Edit</Link> </li>
                                 </ul>
                             </li>
                             <div className="navbar-nav ml-auto">
