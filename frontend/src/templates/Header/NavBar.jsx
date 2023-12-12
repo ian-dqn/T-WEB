@@ -100,7 +100,12 @@ function NavBar() {
                         </>
                     ) : (
                         <div className="navbar-nav ml-auto">
-                            {/* ... (existing code) */}
+                            <a className="nav-item nav-link nav-conn" href="/login">
+                                Se connecter
+                            </a>
+                            <a className="nav-item nav-link nav-ins" href="/register">
+                                S'inscrire
+                            </a>
                         </div>
                     )}
                 </div>
