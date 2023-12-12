@@ -4,6 +4,7 @@ import Accueil from './components/Accueil';
 import LoginUser from "./components/User/LoginUser";
 import RegisterUser from "./components/User/RegisterUser";
 import News from "../src/templates/News/Articles";
+import Edit from './components/User/Edit';
 
 
 
@@ -18,6 +19,7 @@ function App() {
           <Route path='/news' element={<News />} />
         <Route path='/login' element={<LoginUser />} />
         <Route path='/register' element={<RegisterUser />} />
+        <Route path='/Edit/:id' element={<Edit />} />
       </Routes>
       </BrowserRouter>
     </div>
