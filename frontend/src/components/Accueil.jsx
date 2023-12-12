@@ -14,6 +14,7 @@ import CryptoCurrencies from "../templates/Accueil/crypt";
 function Accueil() {
     // Use state to track the checked state
     const [isChecked, setIsChecked] = useState(true);
+    const user = localStorage.getItem('token') ;
 
     // Define an onChange handler to update the state when the checkbox is clicked
     const handleCheckboxChange = () => {

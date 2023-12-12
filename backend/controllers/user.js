@@ -4,11 +4,16 @@ const session = require("express-session");
 const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res, next) => {
+    // console.log('user creation')
+    // console.log(req.body)
+    console.log(typeof(req.body.news))
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             const user = new User({
                 email: req.body.email,
-                password: hash
+                password: hash,
+                crypto: req.body.crypto,
+                news: req.body.news
             });
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -35,7 +40,9 @@ exports.login = (req, res, next) => {
                             { userId: user._id },
                             'RANDOM_TOKEN_SECRET',
                             { expiresIn: '24h' }
-                        )
+                        ),
+                        mail: user.email,
+                        newsPref: user.news
                     });
                 })
                 .catch(error => res.status(500).json({ error }));
