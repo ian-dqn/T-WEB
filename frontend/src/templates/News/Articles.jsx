@@ -4,7 +4,7 @@ import '../../asset/css/ArticleStyle.css';
 
 function DisplayArticle({ user }) {
     let apiUrl = 'http://localhost:5000/api/articles';
-    if (user) {
+    if (user && user.news) {
         const param = user.news
         apiUrl = `http://localhost:5000/api/articles?params=${param}`;
     }
