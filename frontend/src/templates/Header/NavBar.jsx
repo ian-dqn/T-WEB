@@ -1,13 +1,41 @@
 import React from 'react';
 import '../../asset/css/NavBar.css';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 function NavBar() {
+    const [userEmail, setUserEmail] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchUserEmail = async () => {
+            try {
+                const response = await axios.get("http://localhost:3000");
+                console.log("Response from server:", response);
+                const { userEmail } = response.data;
+                console.log("User email:", userEmail);
+                setUserEmail(userEmail);
+                localStorage.setItem('userEmail', userEmail);
+                window.location.href('http://localhost:3000');
+            } catch (error) {
+                console.error("Erreur lors de la récupération de l'e-mail utilisateur:", error.message);
+            }
+        };
+        fetchUserEmail();
+    }, [navigate]);
+
     const handleLogout = () => {
-        // Ajoutez toute logique de déconnexion supplémentaire ici, par exemple, effacer le stockage local
-        localStorage.removeItem('user');
-        // Redirigez vers la page de connexion et actualisez la page
-        window.location.href = '/login';
+        try {
+            localStorage.removeItem('user');
+            document.cookie = 'userEmail=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+            window.location.href = '/login';
+        } catch (error) {
+            console.error('Erreur lors de la déconnexion:', error.message);
+        }
     };
+
+
     const userString = localStorage.getItem('user');
     const user = JSON.parse(userString);
 
@@ -33,24 +61,23 @@ function NavBar() {
                         </a>
                     </div>
 
-                    {localStorage.getItem('user') ? (   
-                     <>
-                        <li className="nav-item dropdown me-3">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                           <span><b className='be-2'>Bonjour</b> <span className='text-danger'>{user.email}</span></span>
-                            </a>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a className="dropdown-item" href="#">Edit</a></li>
-                                <li><a className="dropdown-item" href="#">Portefeuille</a></li>
-                            </ul>
-                        </li>
-                        <div className="navbar-nav ml-auto">
-    
-                            <button className="nav-item nav-link nav-conn" onClick={handleLogout}>
-                                Se déconnecter
-                            </button>
-                        </div>
-                     </>
+                    {userEmail ? (
+                        <>
+                            <li className="nav-item dropdown me-3">
+                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span className='text-danger'>{userEmail || user.user.email}</span>
+                                </a>
+                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a className="dropdown-item" href="#">Edit</a></li>
+                                    <li><a className="dropdown-item" href="#">Portefeuille</a></li>
+                                </ul>
+                            </li>
+                            <div className="navbar-nav ml-auto">
+                                <button className="nav-item nav-link nav-conn" onClick={handleLogout}>
+                                    Se déconnecter
+                                </button>
+                            </div>
+                        </>
                     ) : (
                         <div className="navbar-nav ml-auto">
                             <a className="nav-item nav-link nav-conn" href="/login">

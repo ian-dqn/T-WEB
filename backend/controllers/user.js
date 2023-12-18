@@ -43,7 +43,6 @@ exports.login = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
-//medhi
 exports.deleteUser = (req, res, next) => {
     User.deleteOne({ _id: req.params.id })
         .then(() => {
@@ -104,12 +103,4 @@ exports.getUser = (req, res, next) => {
                 error: error,
             });
         });
-};
-
-exports.logout = (req, res) => {
-    // Vous pouvez ajouter ici la logique pour ajouter le token à la liste noire,
-    // mais dans le cas de JWT, cela est souvent géré côté client.
-
-    // Vous pouvez simplement envoyer une réponse réussie
-    res.status(200).json({ message: 'Déconnexion réussie' });
 };

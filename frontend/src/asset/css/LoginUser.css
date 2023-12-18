@@ -38,3 +38,15 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+.google-login-container {
+    margin-top: 10px;
+    text-align: center;
+}
+h1
+{
+    text-align: center;
+    margin-top: 0;
+}
+
+

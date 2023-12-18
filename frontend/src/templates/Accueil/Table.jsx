@@ -4,7 +4,7 @@ import axios from 'axios';
 import useFetch from "../../hooks/useFetch";
 
 function Table() {
-  const {data, loading, error, reFetch} = useFetch('http://localhost:5000/api/cryptodata')
+  const {data, loading, error, reFetch} = useFetch('http://localhost:4000/api/cryptodata')
   console.log(data)
   return (
       <>

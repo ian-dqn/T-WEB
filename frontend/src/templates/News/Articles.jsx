@@ -3,7 +3,7 @@ import moment from 'moment';
 import '../../asset/css/ArticleStyle.css';
 
 function DisplayArticle() {
-    const { data, loading, error, reFetch } = useFetch('http://localhost:5000/api/articles');
+    const { data, loading, error, reFetch } = useFetch('http://localhost:4000/api/articles');
 
     return (
         <>

@@ -25,7 +25,7 @@ const RegisterUser = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/signup', {
+            const response = await axios.post('http://localhost:4000/api/auth/signup', {
                 email,
                 password,
             });
@@ -39,7 +39,7 @@ const RegisterUser = () => {
             console.error('Erreur lors de la requête API:', error.message);
 
             // Si l'inscription échoue, affichez le message d'erreur
-            setErrorMessage('Inscription échouée. Veuillez réessayer.');
+            setErrorMessage('Utilisateur existant');
         }
     };
 
@@ -70,6 +70,11 @@ const RegisterUser = () => {
 
                 <button type="submit">S'inscrire</button>
             </form>
+            <div className="google-login-container">
+                <a id="loginGoogle" href={'http://localhost:4000/auth/google'}>
+                    S'inscrire avec Google
+                </a>
+            </div>
         </div>
     );
 };
