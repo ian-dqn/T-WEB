@@ -10,6 +10,7 @@ function NavBar() {
 
     useEffect(() => {
         const userEmailCookie = Cookies.get('userEmail');
+        console.log(userEmailCookie);
         setUserEmail(userEmailCookie || 'Email not available');
     }, []);
 
@@ -52,7 +53,7 @@ function NavBar() {
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item dropdown me-3">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span><b className='be-2'>Bonjour</b> <span className='text-danger'>{user.email}</span></span>
+                                    <span><b className='be-2'>Bonjour</b> <span className='text-warning'>{user.email}</span></span>
                                 </a>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><Link to={`/Edit/${user._id}`}>Edit</Link></li>

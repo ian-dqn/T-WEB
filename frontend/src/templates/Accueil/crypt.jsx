@@ -4,6 +4,9 @@ import { Button, Modal } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import '../../asset/css/Paginate.css';
 import '../../asset/css/Accueil.css';
+import { Line } from 'react-chartjs-2';
+import Chart from 'chart.js/auto';
+
 
 const CryptoCurrencies = () => {
     const [cryptoData, setCryptoData] = useState([]);
@@ -100,6 +103,42 @@ const CryptoCurrencies = () => {
         return cryptoData.slice(start, end);
     };
 
+    const options = {
+        scales: {
+            x: {
+                type: 'category',
+                labels: ['7j', '24h', '1h'],
+                beginAtZero: true,
+            },
+            y: {
+                beginAtZero: true,
+            },
+        },
+        plugins: {
+            legend: {
+                display: false,
+            },
+        },
+    };
+
+    const generateChartData = (crypto) => {
+        return {
+            labels: ['7j', '24h', '1h'],
+            datasets: [
+                {
+                    data: [
+                        crypto.quote.USD.percent_change_7d,
+                        crypto.quote.USD.percent_change_24h,
+                        crypto.quote.USD.percent_change_1h,
+                    ],
+                    fill: false,
+                    borderColor: 'yellow',
+                    key: crypto.id,
+                },
+            ],
+        };
+    };
+
     return (
         <div>
             <table className="table table-dark">
@@ -124,6 +163,7 @@ const CryptoCurrencies = () => {
                     <th scope="col" onClick={() => handleSort('7j %')}>
                         7j %
                     </th>
+                    <th scope="col">Graphique</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -131,11 +171,11 @@ const CryptoCurrencies = () => {
                     <tr key={crypto.id}>
                         <td>{startIdx + index + 1}</td>
                         <td>
-                            {' '}
                             <img
                                 src={'https://s2.coinmarketcap.com/static/img/coins/64x64/' + crypto.id + '.png'}
-                                width={30}
+                                width={25}
                             />
+                            {' '}
                             {crypto.name}
                         </td>
                         <td>{crypto.symbol}</td>
@@ -154,6 +194,15 @@ const CryptoCurrencies = () => {
                             {crypto.quote.USD.percent_change_7d !== undefined
                                 ? crypto.quote.USD.percent_change_7d.toFixed(2) + '%'
                                 : 'N/A'}
+                        </td>
+                        <td className="chart-container">
+                            <Line
+                                data={generateChartData(crypto)}
+                                options={{
+                                    ...options,
+                                    responsive: true
+                                }}
+                            />
                         </td>
                     </tr>
                 ))}

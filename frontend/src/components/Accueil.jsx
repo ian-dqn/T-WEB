@@ -10,11 +10,9 @@ import CryptoCurrencies from "../templates/Accueil/crypt";
 
 
 function Accueil() {
-    // Use state to track the checked state
     const [isChecked, setIsChecked] = useState(true);
     const user = localStorage.getItem('token') ;
 
-    // Define an onChange handler to update the state when the checkbox is clicked
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
@@ -55,12 +53,12 @@ function Accueil() {
                                                 <h6>lorem</h6>
                                             </div>
                                             <div className='box'>
-                                                <span>3</span>
+                                                <span>2</span>
                                                 <img src={img3} alt="img 3" className='img-info' />
                                                 <h6>lorem</h6>
                                             </div>
                                             <div className='box'>
-                                                <span>4</span>
+                                                <span>3</span>
                                                 <img src={img4} alt="img 4" className='img-info' />
                                                 <h6>lorem</h6>
                                             </div>
@@ -71,7 +69,6 @@ function Accueil() {
                                             <h5>€ 10124.16564</h5>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div className="carousel-item" data-bs-interval="2000">
                                     <div className="titre">
@@ -88,12 +85,12 @@ function Accueil() {
                                                 <h6>lorem</h6>
                                             </div>
                                             <div className='box'>
-                                                <span>3</span>
+                                                <span>2</span>
                                                 <img src={img3} alt="img 3" className='img-info' />
                                                 <h6>lorem</h6>
                                             </div>
                                             <div className='box'>
-                                                <span>4</span>
+                                                <span>3</span>
                                                 <img src={img4} alt="img 4" className='img-info' />
                                                 <h6>lorem</h6>
                                             </div>
@@ -197,7 +194,7 @@ function Accueil() {
                         </div>
                     </div>
                 </div>
-                <div className="row mt-5">
+                <div className="row">
                    <CryptoCurrencies  />
                 </div>
             </div>

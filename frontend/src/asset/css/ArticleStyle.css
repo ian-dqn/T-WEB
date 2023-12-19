@@ -23,9 +23,6 @@
         flex-wrap: wrap;  /* Permet le retour à la ligne si l'espace est insuffisant */
     }
 
-    h1{
-        margin: 2% 4% 1% 4%;
-    }
 
     h4{
         font-weight: bold;
