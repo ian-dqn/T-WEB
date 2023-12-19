@@ -12,6 +12,7 @@ exports.signup = (req, res, next) => {
             const user = new User({
                 email: req.body.email,
                 password: hash,
+                userPref: req.body.news
             });
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -64,9 +65,13 @@ exports.deleteUser = (req, res, next) => {
 
 exports.putUser = (req, res, next) => {
     const userId = req.params.id;
+    console.log('here in the back update user')
+    console.log(req.body)
+    console.log(req.body.newsPref)
 
     // Exemple : Récupération du nouveau mot de passe depuis le corps de la requête
     const newPassword = req.body.password;
+    const newPreferences = req.body.newsPref;
 
     // Hasher le nouveau mot de passe avant de le stocker
     bcrypt.hash(newPassword, 10)
@@ -74,7 +79,7 @@ exports.putUser = (req, res, next) => {
             // Utilisez le mot de passe haché pour mettre à jour l'utilisateur
             User.findByIdAndUpdate(
                 userId,
-                { password: hashedPassword },
+                { password: hashedPassword, articlesPrefs: newPreferences },
                 { new: true, runValidators: true }
             )
                 .then((updatedUser) => {
