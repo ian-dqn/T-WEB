@@ -1,4 +1,4 @@
-require("dotenv").config(); // environment variable
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -8,7 +8,6 @@ app.use(express.json());
 const User = require("./models/user");
 const userRoutes = require("./routes/user");
 const ApiRoutes = require("./routes/apicrypto");
-//const auth_googleRoutes = require("./rout es/auth_google");
 const passport = require("passport");
 const ArticleRoutes = require("./routes/articleRss");
 
@@ -32,10 +31,20 @@ app.get(
 app.get(
     "/auth/google/callback",
     passport.authenticate("google", {
-        successRedirect: "http://localhost:3000",
+        successRedirect: "/auth/google/success",
         failureRedirect: "/auth/google/failure",
     })
 );
+
+app.get("/auth/google/success", (req, res) => {
+    if (req.isAuthenticated()) {
+        const userEmail = req.user.email || "Email not available";
+        res.cookie('userEmail', userEmail, { maxAge: 900000, httpOnly: true });
+        res.redirect('http://localhost:3000');
+    } else {
+        res.status(401).send("User not authenticated");
+    }
+});
 
 app.get("/logout", (req, res) => {
     res.clearCookie();

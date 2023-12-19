@@ -6,13 +6,13 @@ import img4 from "../asset/img/5426.png";
 import A from '../asset/img/A.png'
 import B from '../asset/img/B.png'
 import C from '../asset/img/c.jpg'
-import Table from '../templates/Accueil/Table';
-import DisplayArticle from '../templates/News/Articles';
+import CryptoCurrencies from "../templates/Accueil/crypt";
 
 
 function Accueil() {
     // Use state to track the checked state
     const [isChecked, setIsChecked] = useState(true);
+    const user = localStorage.getItem('token') ;
 
     // Define an onChange handler to update the state when the checkbox is clicked
     const handleCheckboxChange = () => {
@@ -27,7 +27,7 @@ function Accueil() {
                         <h1>Top 100 Crypto-monnaies par capitalisation de marché</h1>
                         <p>
                             La capitalisation boursière globale du marché crypto est de €1.3T,
-                            soit une augmentation de <span><i className="fa-solid fa-arrow-up"></i> 1.62%</span> <span>au cours des dernières 24 heures. Lire plus</span>
+                                    soit une augmentation de <span><i className="fa-solid fa-arrow-up"></i> 1.62%</span> <span>au cours des dernières 24 heures. Lire plus</span>
                         </p>
                     </div>
                 </div>
@@ -46,8 +46,6 @@ function Accueil() {
                                         <span>Récemment Ajoutées</span>
                                     </div>
                                     <div className="plus">
-                                        <span>Plus</span>
-                                        <i className="fa-solid fa-arrow-right"></i>
                                     </div>
                                     <div className="box-caruse">
                                         <div className="info">
@@ -73,10 +71,7 @@ function Accueil() {
                                             <h5>€ 10124.16564</h5>
                                         </div>
                                     </div>
-                                    {/* <div className="carousel-caption">
-                                        <h2>hooo</h2>
-                                       
-                                    </div> */}
+
                                 </div>
                                 <div className="carousel-item" data-bs-interval="2000">
                                     <div className="titre">
@@ -84,8 +79,6 @@ function Accueil() {
                                         <span>Récemment Ajoutées</span>
                                     </div>
                                     <div className="plus">
-                                        <span>Plus</span>
-                                        <i className="fa-solid fa-arrow-right"></i>
                                     </div>
                                     <div className="box-caruse">
                                         <div className="info">
@@ -111,10 +104,6 @@ function Accueil() {
                                             <p className='text-danger'><i className="fa-solid fa-arrow-down"></i> 20.75%</p>
                                         </div>
                                     </div>
-                                    {/* <div className="carousel-caption">
-                                        <h2>hooo</h2>
-                                       
-                                    </div> */}
                                 </div>
                             </div>
                         </div>
@@ -133,8 +122,6 @@ function Accueil() {
                                         <span>Principales publications de la communauté</span>
                                     </div>
                                     <div className="plus">
-                                        <span>Plus</span>
-                                        <i className="fa-solid fa-arrow-right"></i>
                                     </div>
                                     <div className="box-caruse">
                                         <div className="info">
@@ -172,8 +159,6 @@ function Accueil() {
                                         <span>Récemment Ajoutées</span>
                                     </div>
                                     <div className="plus">
-                                        <span>Plus</span>
-                                        <i className="fa-solid fa-arrow-right"></i>
                                     </div>
                                     <div className="box-caruse">
                                         <div className="info">
@@ -199,10 +184,7 @@ function Accueil() {
                                             <p className='text-danger'><i className="fa-solid fa-arrow-down"></i> 20.75%</p>
                                         </div>
                                     </div>
-                                    {/* <div className="carousel-caption">
-                                        <h2>hooo</h2>
-                                       
-                                    </div> */}
+
                                 </div>
                             </div>
                         </div>
@@ -216,7 +198,7 @@ function Accueil() {
                     </div>
                 </div>
                 <div className="row mt-5">
-                   <Table  />
+                   <CryptoCurrencies  />
                 </div>
             </div>
         </>

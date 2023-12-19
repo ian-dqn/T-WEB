@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../../asset/css/RegisterUser.css';
 import { useNavigate } from 'react-router-dom';
-import '../../asset/css/RegisterUser.css'; // Assurez-vous d'importer le fichier CSS approprié
 
 const RegisterUser = () => {
     const [email, setEmail] = useState('');

@@ -1,96 +1,85 @@
-import React from 'react';
+import { Link, useLocation  } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 import '../../asset/css/NavBar.css';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from "axios";
 
 function NavBar() {
     const [userEmail, setUserEmail] = useState('');
-    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
-        const fetchUserEmail = async () => {
-            try {
-                const response = await axios.get("http://localhost:3000");
-                console.log("Response from server:", response);
-                const { userEmail } = response.data;
-                console.log("User email:", userEmail);
-                setUserEmail(userEmail);
-                localStorage.setItem('userEmail', userEmail);
-                window.location.href('http://localhost:3000');
-            } catch (error) {
-                console.error("Erreur lors de la récupération de l'e-mail utilisateur:", error.message);
-            }
-        };
-        fetchUserEmail();
-    }, [navigate]);
+        const userEmailCookie = Cookies.get('userEmail');
+        setUserEmail(userEmailCookie || 'Email not available');
+    }, []);
 
     const handleLogout = () => {
         try {
             localStorage.removeItem('user');
-            document.cookie = 'userEmail=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+            localStorage.removeItem('data');
             window.location.href = '/login';
         } catch (error) {
             console.error('Erreur lors de la déconnexion:', error.message);
         }
     };
 
-
     const userString = localStorage.getItem('user');
-    const user = JSON.parse(userString);
+    const user = userString ? JSON.parse(userString) : null;
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-dark  px-2">
+            <nav className="navbar navbar-expand-lg navbar-dark px-2">
                 <a className="navbar-brand" href="/">
                     CoinMarketCap
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <div className="navbar-nav mx-auto">
-                        <a className="nav-item nav-link active ms-5" href="#">
+                        <Link className={`nav-item nav-link ms-5 ${location.pathname === '/' ? 'active' : ''}`} to="/">
                             Cryptomonnaies <span className="sr-only">(current)</span>
-                        </a>
-                        <a className="nav-item nav-link ms-5" href="#">
+                        </Link>
+                        <Link className={`nav-item nav-link ms-5 ${location.pathname === '/exchanges' ? 'active' : ''}`} to="/exchanges">
                             Échanges
-                        </a>
-                        <a className="nav-item nav-link ms-5" href="/news">
+                        </Link>
+                        <Link className={`nav-item nav-link ms-5 ${location.pathname === '/news' ? 'active' : ''}`} to="/news">
                             Actualités
-                        </a>
+                        </Link>
                     </div>
 
-                    {userEmail ? (
-                        <>
+                    {user ? (
+                        <ul className="navbar-nav ml-auto">
                             <li className="nav-item dropdown me-3">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span className='text-danger'>{userEmail || user.user.email}</span>
+                                    <span><b className='be-2'>Bonjour</b> <span className='text-danger'>{user.email}</span></span>
                                 </a>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a className="dropdown-item" href="#">Edit</a></li>
-                                    <li><a className="dropdown-item" href="#">Portefeuille</a></li>
+                                    <li><Link to={`/Edit/${user._id}`}>Edit</Link></li>
                                 </ul>
                             </li>
-                            <div className="navbar-nav ml-auto">
-                                <button className="nav-item nav-link nav-conn" onClick={handleLogout}>
+                            <li className="nav-item">
+                                <button className="nav-link nav-conn" onClick={handleLogout}>
                                     Se déconnecter
                                 </button>
-                            </div>
-                        </>
+                            </li>
+                        </ul>
                     ) : (
-                        <div className="navbar-nav ml-auto">
-                            <a className="nav-item nav-link nav-conn" href="/login">
-                                Se connecter
-                            </a>
-                            <a className="nav-item nav-link nav-ins" href="/register">
-                                S'inscrire
-                            </a>
-                        </div>
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <a className="nav-link nav-conn" href="/login">
+                                    Se connecter
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link nav-ins" href="/register">
+                                    S'inscrire
+                                </a>
+                            </li>
+                        </ul>
                     )}
                 </div>
             </nav>
-
         </>
     );
 }

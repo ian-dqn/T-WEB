@@ -7,7 +7,6 @@ const LoginUser = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
     const navigate = useNavigate();
 
     const handleEmailChange = (e) => {
@@ -27,7 +26,9 @@ const LoginUser = () => {
                 email,
                 password,
             });
-            localStorage.setItem('user',JSON.stringify(response.data));
+
+            localStorage.setItem('user',JSON.stringify(response.data.user));
+            localStorage.setItem('data',JSON.stringify(response.data));
             console.log('Server response:', response.data);
             navigate('/');
             window.location.reload();

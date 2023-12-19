@@ -10,7 +10,10 @@ passport.use(
             passReqToCallback: true,
         },
         function (request, accessToken, refreshToken, profile, done) {
-            return done(null, profile);
+            const user = {
+                email: profile.email,
+            };
+            return done(null, user);
         }
     )
 );

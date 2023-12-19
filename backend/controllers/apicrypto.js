@@ -1,5 +1,24 @@
 const axios = require("axios");
 
+exports.getCoinMarket = async (req, res, next) => {
+    try {
+        // Make a request to the CoinGecko API using axios
+        response = await axios.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest', {
+            headers: {
+                'X-CMC_PRO_API_KEY': '4955a046-6314-45d8-b251-b98adbf2a4bf',
+                Accept: 'application/json',
+            },
+            //https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?sort=cmc_rank&limit=100
+        });
+        //  Send the data as JSON in the response
+        res.json(response.data);
+    } catch (error) {
+        //   Handle errors
+        console.error(error);
+        res.status(500).json({ error: "Error Récupération cryptocurrency data" });
+    }
+};
+
 exports.getApi = async (req, res, next) => {
     try {
         // Make a request to the CoinGecko API using axios
