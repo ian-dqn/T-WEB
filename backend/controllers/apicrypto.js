@@ -25,9 +25,9 @@ exports.getCoinMarketDetails = async (req, res, next) => {
     try {
         const apiKey = '4955a046-6314-45d8-b251-b98adbf2a4bf';
         const coinId = req.params.coinId;  // Récupérer l'identifiant de la cryptomonnaie depuis les paramètres de la requête
-        const apiUrl = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/info?id=${coinId}`;
+        const apiUrl = ` https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=${coinId}`;
 
-        // Faire une requête GET à l'API CoinMarketCap
+            // Faire une requête GET à l'API CoinMarketCap
         const response = await axios.get(apiUrl, {
             headers: {
                 'X-CMC_PRO_API_KEY': apiKey,
