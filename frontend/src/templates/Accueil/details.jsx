@@ -6,6 +6,7 @@ import { Line } from 'react-chartjs-2';
 import { useParams } from 'react-router-dom';
 import '../../asset/css/Paginate.css';
 import '../../asset/css/Accueil.css';
+import '../../asset/css/details.css'
 
 const IdCrypto = () => {
     const [cryptoData, setCryptoData] = useState([]);
@@ -33,8 +34,6 @@ const IdCrypto = () => {
 
         fetchData();
     }, [coinId]);
-
-    console.log("apres   " + cryptoData.name);
 
     const formatCurrency = (value) => {
         return new Intl.NumberFormat('en-US', {
@@ -154,7 +153,18 @@ const IdCrypto = () => {
 
     return (
         <div>
-            <table className="table table-dark">
+            {cryptoData && cryptoData.name && (
+                <div className="sidebar">
+                    <img
+                        src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${cryptoData.id}.png`}
+                        alt={cryptoData.name}
+                    />
+                    <h3>{cryptoData.name}</h3>
+                    <span>{cryptoData.symbol}</span>
+                    <p>Prix: {formatCurrency(cryptoData.quote?.USD?.price)}</p>
+                </div>
+            )}
+            {/*<table className="table table-dark">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -221,7 +231,7 @@ const IdCrypto = () => {
                     </tr>
                 ))}
                 </tbody>
-            </table>
+            </table>*/}
 
             <ReactPaginate
                 previousLabel={'Precedent'}
