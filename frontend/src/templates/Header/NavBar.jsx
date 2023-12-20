@@ -40,7 +40,7 @@ function NavBar() {
                         <Link className={`nav-item nav-link ms-5 ${location.pathname === '/' ? 'active' : ''}`} to="/">
                             Cryptomonnaies <span className="sr-only">(current)</span>
                         </Link>
-                        <Link className={`nav-item nav-link ms-5 ${location.pathname === '/Echanges' ? 'active' : ''}`} to="/Echanges">
+                        <Link className={`nav-item nav-link ms-5 ${location.pathname === '/#' ? 'active' : ''}`} to="/#">
                             Echanges <span className="sr-only">(current)</span>
                         </Link>
                         {user ? (

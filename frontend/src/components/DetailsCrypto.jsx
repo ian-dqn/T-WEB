@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import '../asset/css/Accueil.css'
-import Details from "../templates/Accueil/mesCrypto";
+import IdCrypto from "../templates/Accueil/details.jsx";
 
 
-function MyCrypto() {
+function DetailsCrypto() {
     const [isChecked, setIsChecked] = useState(true);
     const user = localStorage.getItem('token') ;
 
@@ -15,11 +15,11 @@ function MyCrypto() {
         <>
             <div className="container">
                 <div className="row">
-                   <Details  />
+                    <IdCrypto  />
                 </div>
             </div>
         </>
     );
 }
 
-export default MyCrypto;
+export default DetailsCrypto;
