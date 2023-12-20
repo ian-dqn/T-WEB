@@ -5,6 +5,7 @@ import LoginUser from "./components/User/LoginUser";
 import RegisterUser from "./components/User/RegisterUser";
 import News from "../src/templates/News/Articles";
 import Edit from './components/User/Edit';
+import MesCryptos from "./components/MesCryptos";
 
 function App() {
   const userString = localStorage.getItem('user');
@@ -12,7 +13,7 @@ function App() {
   const Pref = ({children}) => {
     const userString = localStorage.getItem('user');
     const user = JSON.parse(userString);
-    // console.log(user.news.length)
+    // console.log(user.news.length)        <Route path='/coin/:coinId' element={<DetailCrypto/>} />
     if (user) {
       return user
     }
@@ -24,7 +25,8 @@ function App() {
         <NavBar />
       <Routes>
         <Route path='/' element={<Accueil/>} />
-          <Route path='/news' element={<News user={user} />} />
+        <Route path='/myCrypto' element={<MesCryptos/>} />
+        <Route path='/news' element={<News user={user} />} />
         <Route path='/login' element={<LoginUser />} />
         <Route path='/register' element={<RegisterUser />} />
         <Route path='/Edit/:id' element={<Edit />} />

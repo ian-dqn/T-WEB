@@ -1,7 +1,6 @@
 import { Link, useLocation  } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import axios from 'axios';
 import '../../asset/css/NavBar.css';
 
 function NavBar() {
@@ -41,9 +40,15 @@ function NavBar() {
                         <Link className={`nav-item nav-link ms-5 ${location.pathname === '/' ? 'active' : ''}`} to="/">
                             Cryptomonnaies <span className="sr-only">(current)</span>
                         </Link>
-                        <Link className={`nav-item nav-link ms-5 ${location.pathname === '/exchanges' ? 'active' : ''}`} to="/exchanges">
-                            Échanges
+                        <Link className={`nav-item nav-link ms-5 ${location.pathname === '/Echanges' ? 'active' : ''}`} to="/Echanges">
+                            Echanges <span className="sr-only">(current)</span>
                         </Link>
+                        {user ? (
+                        <Link className={`nav-item nav-link ms-5 ${location.pathname === '/myCrypto' ? 'active' : ''}`} to="/myCrypto">
+                            Mes Cryptos
+                        </Link>
+                        ) : null}
+
                         <Link className={`nav-item nav-link ms-5 ${location.pathname === '/news' ? 'active' : ''}`} to="/news">
                             Actualités
                         </Link>
