@@ -171,13 +171,17 @@ const CryptoCurrencies = () => {
                     <tr key={crypto.id}>
                         <td>{startIdx + index + 1}</td>
                         <td>
-                            <img
-                                src={'https://s2.coinmarketcap.com/static/img/coins/64x64/' + crypto.id + '.png'}
-                                width={25}
-                            />
-                            {' '}
-                            {crypto.name}
+                            <a href={`http://localhost:3000/${crypto.id}`}>
+                                <img
+                                    src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`}
+                                    width={25}
+                                    alt={crypto.name}
+                                />
+                                {' '}
+                                {crypto.name}
+                            </a>
                         </td>
+
                         <td>{crypto.symbol}</td>
                         <td>{formatCurrency(crypto.quote.USD.price)}</td>
                         <td>

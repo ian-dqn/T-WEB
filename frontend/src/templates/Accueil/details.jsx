@@ -24,8 +24,8 @@ const IdCrypto = () => {
                 const response = await axios.get(`http://localhost:4000/api/cryptodata/coin/${coinId}`);
                 console.log(response.data.data);
 
-                if (response.data && response.data.data[1]) {
-                    setCryptoData(response.data.data[1]);
+                if (response.data && response.data.data[coinId]) {
+                    setCryptoData(response.data.data[coinId]);
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -155,6 +155,7 @@ const IdCrypto = () => {
         <div>
             {cryptoData && cryptoData.name && (
                 <div className="sidebar">
+                    <button type="button" className="">Retour</button>
                     <img
                         src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${cryptoData.id}.png`}
                         alt={cryptoData.name}
