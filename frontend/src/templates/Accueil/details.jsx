@@ -31,7 +31,6 @@ const IdCrypto = () => {
                 console.error('Error fetching data:', error);
             }
         };
-
         fetchData();
     }, [coinId]);
 
