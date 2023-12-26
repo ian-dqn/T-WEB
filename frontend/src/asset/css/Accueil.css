@@ -3,6 +3,7 @@
     font-size: 30px !important;
     font-weight: 500 !important;
     margin-bottom: 10px !important;
+    width: 100% !important
 }
 .info p {
     margin-top: 5px;
@@ -150,4 +151,27 @@ table {
 table tr ,th ,td {
     background-color: transparent !important;
     color: #fff !important;
+}
+
+.chart-container {
+    max-width: 150px; /* Ajustez la largeur maximale du conteneur du graphique */
+    max-height: 100px; /* Ajustez la hauteur maximale du conteneur du graphique */
+    margin: auto; /* Centre le conteneur du graphique */
+}
+
+.table {
+    width: 100%;
+    table-layout: auto;
+}
+
+/* Styles pour les cellules du tableau */
+.table th, .table td {
+    text-align: center;
+    white-space: nowrap; /* Empêche le texte de se retourner à la ligne */
+    padding: 15px;
+    vertical-align: middle;
+}
+
+a{
+    color: white;
 }

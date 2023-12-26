@@ -3,12 +3,11 @@ import moment from 'moment';
 import '../../asset/css/ArticleStyle.css';
 
 function DisplayArticle({ user }) {
-    let apiUrl = 'http://localhost:5000/api/articles';
+    let apiUrl = 'http://localhost:4000/api/articles';
     if (user && user.news) {
         const param = user.news
-        apiUrl = `http://localhost:5000/api/articles?params=${param}`;
+        apiUrl = `http://localhost:4000/api/articles?params=${param}`;
     }
-
     const { data, loading, error, reFetch } = useFetch(apiUrl);
 
     return (

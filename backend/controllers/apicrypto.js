@@ -2,6 +2,8 @@ const axios = require("axios");
 
 exports.getCoinMarket = async (req, res, next) => {
     try {
+
+
         // Make a request to the CoinGecko API using axios
         response = await axios.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest', {
             headers: {
@@ -18,6 +20,36 @@ exports.getCoinMarket = async (req, res, next) => {
         res.status(500).json({ error: "Error Récupération cryptocurrency data" });
     }
 };
+
+exports.getCoinMarketDetails = async (req, res, next) => {
+    try {
+        const apiKey = '4955a046-6314-45d8-b251-b98adbf2a4bf';
+        const coinId = req.params.coinId;  // Récupérer l'identifiant de la cryptomonnaie depuis les paramètres de la requête
+        const apiUrl = ` https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=${coinId}`;
+
+            // Faire une requête GET à l'API CoinMarketCap
+        const response = await axios.get(apiUrl, {
+            headers: {
+                'X-CMC_PRO_API_KEY': apiKey,
+                Accept: 'application/json',
+            }
+        });
+
+        // Vérifier si la requête a réussi
+        if (response.status === 200) {
+            // Envoyer les données de la cryptomonnaie en réponse
+            res.json(response.data);
+        } else {
+            // Gérer un code d'état autre que 200
+            res.status(response.status).json({ error: "Erreur lors de la récupération des données de la cryptomonnaie" });
+        }
+    } catch (error) {
+        // Gérer les erreurs
+        console.error(error);
+        res.status(500).json({ error: "Erreur lors de la récupération des données de la cryptomonnaie" });
+    }
+};
+
 
 exports.getApi = async (req, res, next) => {
     try {

@@ -20,7 +20,7 @@ const Edit = () => {
     news:''
   })
   useEffect(()=>{
-    axios.get(`http://localhost:5000/api/auth/${id}`,{
+    axios.get(`http://localhost:4000/api/auth/${id}`,{
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -51,7 +51,7 @@ const Edit = () => {
 
   const handelSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:5000/api/auth/${id}`,{
+    axios.put(`http://localhost:4000/api/auth/${id}`,{
       password:values.password,
       newsPref:values.news
     },
@@ -90,7 +90,10 @@ const Edit = () => {
           <label htmlFor="preferences">Preferences:</label>
           <SelectUserPref onChange={handleNewsParamsChange} initialValues={values.news} />
 
-          <button type="submit">modifier</button>
+          <label htmlFor="preferences">Preferences:</label>
+          <SelectUserPref onChange={handleNewsParamsChange} initialValues={values.news} />
+
+          <button type="submit">Modifier</button>
         </form>
       </div>
     </>

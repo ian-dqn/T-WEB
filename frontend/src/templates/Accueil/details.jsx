@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Modal } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
+import { Line } from 'react-chartjs-2';
+import { useParams } from 'react-router-dom';
 import '../../asset/css/Paginate.css';
 import '../../asset/css/Accueil.css';
-import { Line } from 'react-chartjs-2';
-import Chart from 'chart.js/auto';
+import '../../asset/css/details.css'
 
-
-const CryptoCurrencies = () => {
+const IdCrypto = () => {
     const [cryptoData, setCryptoData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [sortOrder, setSortOrder] = useState('asc');
@@ -16,21 +16,23 @@ const CryptoCurrencies = () => {
     const itemsPerPage = 20;
     const startIdx = currentPage * itemsPerPage;
 
+    const { coinId } = useParams();
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/api/cryptodata/coin');
+                const response = await axios.get(`http://localhost:4000/api/cryptodata/coin/${coinId}`);
                 console.log(response.data.data);
-                if (response.data && response.data.data) {
-                    setCryptoData(response.data.data);
+
+                if (response.data && response.data.data[coinId]) {
+                    setCryptoData(response.data.data[coinId]);
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
-
         fetchData();
-    }, []);
+    }, [coinId]);
 
     const formatCurrency = (value) => {
         return new Intl.NumberFormat('en-US', {
@@ -40,7 +42,7 @@ const CryptoCurrencies = () => {
     };
 
     const handleSort = (columnName) => {
-        setCurrentPage(0); // Réinitialise la page actuelle à zéro
+        setCurrentPage(0);
 
         let sortedData;
 
@@ -100,7 +102,11 @@ const CryptoCurrencies = () => {
     const displayedData = () => {
         const start = currentPage * itemsPerPage;
         const end = (currentPage + 1) * itemsPerPage;
-        return cryptoData.slice(start, end);
+
+        // Assurez-vous que cryptoData est un tableau avant d'appeler slice
+        const slicedData = Array.isArray(cryptoData) ? cryptoData.slice(start, end) : [];
+
+        return slicedData;
     };
 
     const options = {
@@ -122,14 +128,19 @@ const CryptoCurrencies = () => {
     };
 
     const generateChartData = (crypto) => {
+        if (!crypto.quote || !crypto.quote.USD) {
+            // Si crypto.quote ou crypto.quote.USD est undefined, retournez un objet vide ou une valeur par défaut
+            return { labels: [], datasets: [] };
+        }
+
         return {
             labels: ['7j', '24h', '1h'],
             datasets: [
                 {
                     data: [
-                        crypto.quote.USD.percent_change_7d,
-                        crypto.quote.USD.percent_change_24h,
-                        crypto.quote.USD.percent_change_1h,
+                        crypto.quote.USD.percent_change_7d || 0,
+                        crypto.quote.USD.percent_change_24h || 0,
+                        crypto.quote.USD.percent_change_1h || 0,
                     ],
                     fill: false,
                     borderColor: 'yellow',
@@ -141,7 +152,19 @@ const CryptoCurrencies = () => {
 
     return (
         <div>
-            <table className="table table-dark">
+            {cryptoData && cryptoData.name && (
+                <div className="sidebar">
+                    <button type="button" className="">Retour</button>
+                    <img
+                        src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${cryptoData.id}.png`}
+                        alt={cryptoData.name}
+                    />
+                    <h3>{cryptoData.name}</h3>
+                    <span>{cryptoData.symbol}</span>
+                    <p>Prix: {formatCurrency(cryptoData.quote?.USD?.price)}</p>
+                </div>
+            )}
+            {/*<table className="table table-dark">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -171,17 +194,14 @@ const CryptoCurrencies = () => {
                     <tr key={crypto.id}>
                         <td>{startIdx + index + 1}</td>
                         <td>
-                            <a href={`http://localhost:3000/${crypto.id}`}>
-                                <img
-                                    src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`}
-                                    width={25}
-                                    alt={crypto.name}
-                                />
-                                {' '}
-                                {crypto.name}
-                            </a>
+                            <img
+                                src={'https://s2.coinmarketcap.com/static/img/coins/64x64/' + crypto.id + '.png'}
+                                width={25}
+                                alt={crypto.name}
+                            />
+                            {' '}
+                            {crypto.name}
                         </td>
-
                         <td>{crypto.symbol}</td>
                         <td>{formatCurrency(crypto.quote.USD.price)}</td>
                         <td>
@@ -211,7 +231,7 @@ const CryptoCurrencies = () => {
                     </tr>
                 ))}
                 </tbody>
-            </table>
+            </table>*/}
 
             <ReactPaginate
                 previousLabel={'Precedent'}
@@ -232,7 +252,6 @@ const CryptoCurrencies = () => {
                     <Button variant="primary" onClick={handleSort}>
                         Sort by Price ({sortOrder === 'asc' ? 'Ascending' : 'Descending'})
                     </Button>
-                    {/* Ajoutez d'autres boutons de filtre ici si nécessaire */}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>
@@ -250,4 +269,4 @@ const CryptoCurrencies = () => {
     );
 };
 
-export default CryptoCurrencies;
+export default IdCrypto;

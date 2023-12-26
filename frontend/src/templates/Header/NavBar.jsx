@@ -1,25 +1,34 @@
-import React, { useState } from 'react';
-import axios from 'axios'
+import { Link, useLocation  } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 import '../../asset/css/NavBar.css';
-import {Link} from 'react-router-dom'
-import Edit from '../../components/User/Edit'; // Assurez-vous de spécifier le bon chemin pour le fichier Edit
 
 function NavBar() {
+    const [userEmail, setUserEmail] = useState('');
+    const location = useLocation();
 
-    const userString = localStorage.getItem('user');
-    const user = JSON.parse(userString);
+    useEffect(() => {
+        const userEmailCookie = Cookies.get('userEmail');
+        console.log(userEmailCookie);
+        setUserEmail(userEmailCookie || 'Email not available');
+    }, []);
 
     const handleLogout = () => {
-        localStorage.removeItem('user');
-        window.location.href = '/login';
+        try {
+            localStorage.removeItem('user');
+            localStorage.removeItem('data');
+            window.location.href = '/login';
+        } catch (error) {
+            console.error('Erreur lors de la déconnexion:', error.message);
+        }
     };
 
-    
-
+    const userString = localStorage.getItem('user');
+    const user = userString ? JSON.parse(userString) : null;
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-dark  px-2">
+            <nav className="navbar navbar-expand-lg navbar-dark px-2">
                 <a className="navbar-brand" href="/">
                     CoinMarketCap
                 </a>
@@ -28,42 +37,52 @@ function NavBar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <div className="navbar-nav mx-auto">
-                        <a className="nav-item nav-link active ms-5" href="#">
+                        <Link className={`nav-item nav-link ms-5 ${location.pathname === '/' ? 'active' : ''}`} to="/">
                             Cryptomonnaies <span className="sr-only">(current)</span>
-                        </a>
-                        <a className="nav-item nav-link ms-5" href="#">
-                            Échanges
-                        </a>
-                        <a className="nav-item nav-link ms-5" href="/news">
+                        </Link>
+                        <Link className={`nav-item nav-link ms-5 ${location.pathname === '/#' ? 'active' : ''}`} to="/#">
+                            Echanges <span className="sr-only">(current)</span>
+                        </Link>
+                        {user ? (
+                        <Link className={`nav-item nav-link ms-5 ${location.pathname === '/myCrypto' ? 'active' : ''}`} to="/myCrypto">
+                            Mes Cryptos
+                        </Link>
+                        ) : null}
+
+                        <Link className={`nav-item nav-link ms-5 ${location.pathname === '/news' ? 'active' : ''}`} to="/news">
                             Actualités
-                        </a>
+                        </Link>
                     </div>
 
-                    {localStorage.getItem('user') ? (
-                        <>
+                    {user ? (
+                        <ul className="navbar-nav ml-auto">
                             <li className="nav-item dropdown me-3">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span><b className='be-2'>Bonjour</b> <span className='text-danger'>{user.email}</span></span>
+                                    <span><b className='be-2'>Bonjour</b> <span className='text-warning'>{user.email}</span></span>
                                 </a>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><Link to={`/Edit/${user._id}`}>Edit</Link> </li>
+                                    <li><Link to={`/Edit/${user._id}`}>Edit</Link></li>
                                 </ul>
                             </li>
-                            <div className="navbar-nav ml-auto">
-                                <button className="nav-item nav-link nav-conn" onClick={handleLogout}>
+                            <li className="nav-item">
+                                <button className="nav-link nav-conn" onClick={handleLogout}>
                                     Se déconnecter
                                 </button>
-                            </div>
-                        </>
+                            </li>
+                        </ul>
                     ) : (
-                        <div className="navbar-nav ml-auto">
-                            <a className="nav-item nav-link nav-conn" href="/login">
-                                Se connecter
-                            </a>
-                            <a className="nav-item nav-link nav-ins" href="/register">
-                                S'inscrire
-                            </a>
-                        </div>
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <a className="nav-link nav-conn" href="/login">
+                                    Se connecter
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link nav-ins" href="/register">
+                                    S'inscrire
+                                </a>
+                            </li>
+                        </ul>
                     )}
                 </div>
             </nav>

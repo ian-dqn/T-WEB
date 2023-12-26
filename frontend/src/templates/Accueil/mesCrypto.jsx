@@ -5,10 +5,9 @@ import ReactPaginate from 'react-paginate';
 import '../../asset/css/Paginate.css';
 import '../../asset/css/Accueil.css';
 import { Line } from 'react-chartjs-2';
-import Chart from 'chart.js/auto';
 
 
-const CryptoCurrencies = () => {
+const Details = () => {
     const [cryptoData, setCryptoData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [sortOrder, setSortOrder] = useState('asc');
@@ -171,17 +170,13 @@ const CryptoCurrencies = () => {
                     <tr key={crypto.id}>
                         <td>{startIdx + index + 1}</td>
                         <td>
-                            <a href={`http://localhost:3000/${crypto.id}`}>
-                                <img
-                                    src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`}
-                                    width={25}
-                                    alt={crypto.name}
-                                />
-                                {' '}
-                                {crypto.name}
-                            </a>
+                            <img
+                                src={'https://s2.coinmarketcap.com/static/img/coins/64x64/' + crypto.id + '.png'}
+                                width={25}
+                            />
+                            {' '}
+                            {crypto.name}
                         </td>
-
                         <td>{crypto.symbol}</td>
                         <td>{formatCurrency(crypto.quote.USD.price)}</td>
                         <td>
@@ -250,4 +245,4 @@ const CryptoCurrencies = () => {
     );
 };
 
-export default CryptoCurrencies;
+export default Details;

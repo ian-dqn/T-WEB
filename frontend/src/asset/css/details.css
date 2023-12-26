@@ -1,0 +1,22 @@
+/* styles.css */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    height: 100%;
+    width: 300px;
+    background-color: #0d6efd;
+    padding: 30px;
+}
+
+.sidebar h3 {
+    margin-bottom: 10px;
+}
+
+.sidebar img {
+    width: 15%;
+}
+
+.sidebar p {
+    margin: 10px 0;
+}

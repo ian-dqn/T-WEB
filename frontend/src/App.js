@@ -5,6 +5,8 @@ import LoginUser from "./components/User/LoginUser";
 import RegisterUser from "./components/User/RegisterUser";
 import News from "../src/templates/News/Articles";
 import Edit from './components/User/Edit';
+import MyCrypto from "./components/MesCryptos";
+import DetailsCrypto from "./components/DetailsCrypto";
 
 function App() {
   const userString = localStorage.getItem('user');
@@ -24,7 +26,9 @@ function App() {
         <NavBar />
       <Routes>
         <Route path='/' element={<Accueil/>} />
-          <Route path='/news' element={<News user={user} />} />
+        <Route path='/myCrypto' element={<MyCrypto/>} />
+        <Route path='/:coinId' element={<DetailsCrypto/>} />
+        <Route path='/news' element={<News user={user} />} />
         <Route path='/login' element={<LoginUser />} />
         <Route path='/register' element={<RegisterUser />} />
         <Route path='/Edit/:id' element={<Edit />} />
