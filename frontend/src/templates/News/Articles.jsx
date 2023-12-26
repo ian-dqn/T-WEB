@@ -4,8 +4,10 @@ import '../../asset/css/ArticleStyle.css';
 
 function DisplayArticle({ user }) {
     let apiUrl = 'http://localhost:5000/api/articles';
+    console.log('here', user)
     if (user && user.news) {
         const param = user.news
+        console.log('user news pref:', param)
         apiUrl = `http://localhost:5000/api/articles?params=${param}`;
     }
 

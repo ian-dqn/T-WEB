@@ -12,7 +12,7 @@ function App() {
   const Pref = ({children}) => {
     const userString = localStorage.getItem('user');
     const user = JSON.parse(userString);
-    // console.log(user.news.length)
+    console.log(user)
     if (user) {
       return user
     }

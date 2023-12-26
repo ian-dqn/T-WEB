@@ -4,9 +4,6 @@ const session = require("express-session");
 const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res, next) => {
-    // console.log('user creation')
-    // console.log(req.body)
-    console.log(typeof(req.body.news))
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             const user = new User({
