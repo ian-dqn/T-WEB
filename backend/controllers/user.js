@@ -62,9 +62,6 @@ exports.deleteUser = (req, res, next) => {
 
 exports.putUser = (req, res, next) => {
     const userId = req.params.id;
-    console.log('here in the back update user')
-    console.log(req.body)
-    console.log(req.body.newsPref)
 
     // Exemple : Récupération du nouveau mot de passe depuis le corps de la requête
     const newPassword = req.body.password;
