@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import Cookies from "js-cookie";
 import "../../asset/css/NavBar.css";
 
 function NavBar() {
@@ -27,6 +26,7 @@ function NavBar() {
 
   const handleLogout = () => {
     try {
+      localStorage.removeItem("data");
       localStorage.removeItem("user");
       localStorage.removeItem("userEmail");
       setIsLoggedIn(false);
