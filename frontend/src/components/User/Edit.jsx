@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
+import SelectUserPref from './newsPreferences';
 
 const Edit = () => {
 
@@ -15,8 +16,8 @@ const Edit = () => {
   const [values , setValues] = useState({
     _id:id,
     email:'',
-    password:''
-
+    password:'',
+    news:''
   })
   useEffect(()=>{
     axios.get(`http://localhost:4000/api/auth/${id}`,{
@@ -25,20 +26,40 @@ const Edit = () => {
             'Authorization': `Bearer ${token}`,
         }
     })
-          .then(res=>{
-            setValues({...values,email:res.data.email,password:res.data.password})
+          .then(res => {
+            console.log(res)
+            setValues(prevValues => ({
+              ...prevValues,
+              email: res.data.email,
+              password: res.data.password,
+              news: res.data.articlesPrefs,
+            }));
+            console.log('values updated')
+            console.log(values)
           })
           .catch(err=>console.log(err))
-  },[])
+  },[id, token])
 
   const navigate = useNavigate()
-  const handelSubmit = (e)=>{
+
+   const handleNewsParamsChange = (selectedOptions) => {
+    const selectedNews = selectedOptions.map((option) => option.value);
+    setValues({ ...values, news: selectedNews });
+    console.log('prefs changed:')
+    console.log(values)
+  };
+
+  const handelSubmit = (e) => {
     e.preventDefault();
     axios.put(`http://localhost:4000/api/auth/${id}`,{
-      password:values.password
-    },{ headers: {'Content-Type': 'application/json','Authorization': `Bearer ${token}`} })
-      .then(res=>{navigate("/") }).catch(err=>console.log(err))     
+      password:values.password,
+      newsPref:values.news
+    },
+    { headers: {'Content-Type': 'application/json','Authorization': `Bearer ${token}`} })
+      .then(res=>{navigate("/") })
+      .catch(err=>console.log(err))
   }
+
   return (
     <>
       <div className="login-container">
@@ -52,7 +73,7 @@ const Edit = () => {
             id="email"
             name="email"
             value={values.email}
-            readonly
+            readOnly
             required
           />
 
@@ -65,6 +86,12 @@ const Edit = () => {
             required
             onChange={e=>setValues({...values,password:e.target.value})}
           />
+
+          <label htmlFor="preferences">Preferences:</label>
+          <SelectUserPref onChange={handleNewsParamsChange} initialValues={values.news} />
+
+          <label htmlFor="preferences">Preferences:</label>
+          <SelectUserPref onChange={handleNewsParamsChange} initialValues={values.news} />
 
           <button type="submit">Modifier</button>
         </form>

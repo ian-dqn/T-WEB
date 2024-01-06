@@ -4,14 +4,12 @@ const session = require("express-session");
 const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res, next) => {
-    // console.log('user creation')
-    // console.log(req.body)
-    console.log(typeof(req.body.news))
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             const user = new User({
                 email: req.body.email,
                 password: hash,
+                userPref: req.body.news
             });
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -66,6 +64,7 @@ exports.putUser = (req, res, next) => {
 
     // Exemple : Récupération du nouveau mot de passe depuis le corps de la requête
     const newPassword = req.body.password;
+    const newPreferences = req.body.newsPref;
 
     // Hasher le nouveau mot de passe avant de le stocker
     bcrypt.hash(newPassword, 10)
@@ -73,7 +72,7 @@ exports.putUser = (req, res, next) => {
             // Utilisez le mot de passe haché pour mettre à jour l'utilisateur
             User.findByIdAndUpdate(
                 userId,
-                { password: hashedPassword },
+                { password: hashedPassword, articlesPrefs: newPreferences },
                 { new: true, runValidators: true }
             )
                 .then((updatedUser) => {
