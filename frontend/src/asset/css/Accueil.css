@@ -154,9 +154,9 @@ table tr ,th ,td {
 }
 
 .chart-container {
-    max-width: 150px; /* Ajustez la largeur maximale du conteneur du graphique */
-    max-height: 100px; /* Ajustez la hauteur maximale du conteneur du graphique */
-    margin: auto; /* Centre le conteneur du graphique */
+    max-width: 150px;
+    max-height: 100px;
+    margin: auto;
 }
 
 .table {
