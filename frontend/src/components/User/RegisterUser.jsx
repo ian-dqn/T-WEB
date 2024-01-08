@@ -71,6 +71,7 @@ const RegisterUser = () => {
                 <button type="submit">S'inscrire</button>
             </form>
             <div className="google-login-container">
+                <img id="imgGoogle" src={"https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"}/>
                 <a id="loginGoogle" href={'http://localhost:4000/auth/google'}>
                     S'inscrire avec Google
                 </a>

@@ -41,7 +41,7 @@ function Accueil() {
                                 <div className="carousel-item active" data-bs-interval="2000">
                                     <div className="titre">
                                         <i className="fa-solid fa-clock"></i>
-                                        <span>Récemment Ajoutées</span>
+                                        <span>Top 3 du moment</span>
                                     </div>
                                     <div className="plus">
                                     </div>
@@ -49,24 +49,19 @@ function Accueil() {
                                         <div className="info">
                                             <div className='box'>
                                                 <span>1</span>
-                                                <img src={img1} alt="img 1" className='img-info' />
-                                                <h6>lorem</h6>
+                                                <img src={"https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"} alt="img 1" className='img-info' />
+                                                <h6>Bitcoin</h6>
                                             </div>
                                             <div className='box'>
                                                 <span>2</span>
-                                                <img src={img3} alt="img 3" className='img-info' />
-                                                <h6>lorem</h6>
+                                                <img src={"https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"} alt="img 3" className='img-info' />
+                                                <h6>Etherum</h6>
                                             </div>
                                             <div className='box'>
                                                 <span>3</span>
-                                                <img src={img4} alt="img 4" className='img-info' />
-                                                <h6>lorem</h6>
+                                                <img src={"https://s2.coinmarketcap.com/static/img/coins/64x64/1518.png"} alt="img 4" className='img-info' />
+                                                <h6>Maker</h6>
                                             </div>
-                                        </div>
-                                        <div className="numbers">
-                                            <h5>€ 10124.16564</h5>
-                                            <h5>€ 10124.16564</h5>
-                                            <h5>€ 10124.16564</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -81,18 +76,18 @@ function Accueil() {
                                         <div className="info">
                                             <div className='box'>
                                                 <span>1</span>
-                                                <img src={img1} alt="img 1" className='img-info' />
-                                                <h6>lorem</h6>
+                                                <img src={"https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"} alt="img 1" className='img-info' />
+                                                <h6>Bitcoin</h6>
                                             </div>
                                             <div className='box'>
                                                 <span>2</span>
-                                                <img src={img3} alt="img 3" className='img-info' />
-                                                <h6>lorem</h6>
+                                                <img src={"https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"} alt="img 3" className='img-info' />
+                                                <h6>Etherum</h6>
                                             </div>
                                             <div className='box'>
                                                 <span>3</span>
-                                                <img src={img4} alt="img 4" className='img-info' />
-                                                <h6>lorem</h6>
+                                                <img src={"https://s2.coinmarketcap.com/static/img/coins/64x64/1518.png"} alt="img 4" className='img-info' />
+                                                <h6>Maker</h6>
                                             </div>
                                         </div>
                                         <div className="numbers text-number">
@@ -145,10 +140,6 @@ function Accueil() {
                                             <span className='btn-text'>+ S'abonner</span>
                                         </div>
                                     </div>
-                                    {/* <div className="carousel-caption">
-                                        <h2>hooo</h2>
-                                       
-                                    </div> */}
                                 </div>
                                 <div className="carousel-item" data-bs-interval="2000">
                                     <div className="titre">

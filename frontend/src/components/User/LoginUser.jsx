@@ -71,6 +71,7 @@ const LoginUser = () => {
       </form>
       <div className="google-login-container">
         <a id="loginGoogle" href={"http://localhost:4000/auth/google"}>
+          <img id="imgGoogle" src={"https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"}/>
           Se connecter avec Google
         </a>
       </div>

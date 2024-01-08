@@ -11,7 +11,7 @@ function NavBar() {
     const urlParams = new URLSearchParams(window.location.search);
     const email = urlParams.get("userEmail");
     if (email) {
-      localStorage.setItem("userEmail", email); // Ajouter cette ligne
+      localStorage.setItem("userEmail", email);
       setUserEmail(email);
       window.history.replaceState(null, null, window.location.pathname);
     } else {
@@ -42,7 +42,7 @@ function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark px-2">
       <a className="navbar-brand" href="/">
-        CoinMarketCap
+       CryptoMarket
       </a>
       <button
         className="navbar-toggler"
@@ -66,22 +66,11 @@ function NavBar() {
           >
             Cryptomonnaies <span className="sr-only">(current)</span>
           </Link>
-          <Link
-            className={`nav-item nav-link ms-5 ${
-              location.pathname === "/#" ? "active" : ""
-            }`}
-            to="/#"
-          >
-            Echanges <span className="sr-only">(current)</span>
-          </Link>
-          <Link
-            className={`nav-item nav-link ms-5 ${
-              location.pathname === "/myCrypto" ? "active" : ""
-            }`}
-            to="/myCrypto"
-          >
-            Mes Cryptos
-          </Link>
+          {user || userEmail ? (
+              <Link className={`nav-item nav-link ms-5 ${location.pathname === '/myCrypto' ? 'active' : ''}`} to="/myCrypto">
+                Mes Cryptos
+              </Link>
+          ):null}
           <Link
             className={`nav-item nav-link ms-5 ${
               location.pathname === "/news" ? "active" : ""
