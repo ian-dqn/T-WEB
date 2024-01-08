@@ -1,22 +1,30 @@
-/* styles.css */
-
 .sidebar {
-    position: fixed;
+    position: absolute;
     left: 0;
-    height: 100%;
+    height: 70%;
     width: 300px;
-    background-color: #0d6efd;
+    background-color: white;
     padding: 30px;
 }
-
-.sidebar h3 {
-    margin-bottom: 10px;
-}
-
 .sidebar img {
     width: 15%;
+    margin-right: 10px;
 }
 
 .sidebar p {
     margin: 10px 0;
+}
+.chart {
+    width: 800px;
+    height: 400px;
+    margin-top: 40px;
+    margin-left: 25%;
+}
+.crypto-currencies-container {
+    margin-top: 30px;
+}
+#name{
+    margin-top: 50px;
+    font-size: 20px;
+    color: black;
 }
