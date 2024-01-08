@@ -3,10 +3,10 @@ import axios from 'axios';
 import { Button, Modal } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { Line } from 'react-chartjs-2';
-import {Link, useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import '../../asset/css/Paginate.css';
+import '../../asset/css/Accueil.css';
 import '../../asset/css/details.css'
-import CryptoCurrencies from '../Accueil/crypt';
 
 const IdCrypto = () => {
     const [cryptoData, setCryptoData] = useState([]);
@@ -154,37 +154,96 @@ const IdCrypto = () => {
         <div>
             {cryptoData && cryptoData.name && (
                 <div className="sidebar">
-                    <div>
-                        <Link to="/">
-                            <button style={{ backgroundColor: 'black' }} type="button">Retour</button>
-                        </Link>
-                    </div>
-                    <div id="name">
-                        <img
-                            src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${cryptoData.id}.png`}
-                        />
-                        <span>{cryptoData.name}</span>
-                        <span style={{ marginLeft: '10px' }}>{cryptoData.symbol}</span>
-                        <p style={{ fontSize: '25px',fontWeight: 'bold' }}> {formatCurrency(cryptoData.quote?.USD?.price)}</p>
-                    </div>
-
+                    <button type="button" className="">Retour</button>
+                    <img
+                        src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${cryptoData.id}.png`}
+                        alt={cryptoData.name}
+                    />
+                    <h3>{cryptoData.name}</h3>
+                    <span>{cryptoData.symbol}</span>
+                    <p>Prix: {formatCurrency(cryptoData.quote?.USD?.price)}</p>
                 </div>
             )}
-            <div className="chart">
-                <Line
-                    data={generateChartData(cryptoData)}
-                    options={{
-                        ...options,
-                        responsive: true,
-                        maintainAspectRatio: false,
-                    }}
-                />
-            </div>
+            {/*<table className="table table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" onClick={() => handleSort('Nom')}>
+                        Nom
+                    </th>
+                    <th scope="col" onClick={() => handleSort('Symbole')}>
+                        Symbole
+                    </th>
+                    <th scope="col" onClick={() => handleSort('Prix')}>
+                        Prix
+                    </th>
+                    <th scope="col" onClick={() => handleSort('1h %')}>
+                        1h %
+                    </th>
+                    <th scope="col" onClick={() => handleSort('24h %')}>
+                        24h %
+                    </th>
+                    <th scope="col" onClick={() => handleSort('7j %')}>
+                        7j %
+                    </th>
+                    <th scope="col">Graphique</th>
+                </tr>
+                </thead>
+                <tbody>
+                {displayedData().map((crypto, index) => (
+                    <tr key={crypto.id}>
+                        <td>{startIdx + index + 1}</td>
+                        <td>
+                            <img
+                                src={'https://s2.coinmarketcap.com/static/img/coins/64x64/' + crypto.id + '.png'}
+                                width={25}
+                                alt={crypto.name}
+                            />
+                            {' '}
+                            {crypto.name}
+                        </td>
+                        <td>{crypto.symbol}</td>
+                        <td>{formatCurrency(crypto.quote.USD.price)}</td>
+                        <td>
+                            {crypto.quote.USD.percent_change_1h !== undefined
+                                ? crypto.quote.USD.percent_change_1h.toFixed(2) + '%'
+                                : 'N/A'}
+                        </td>
+                        <td>
+                            {crypto.quote.USD.percent_change_24h !== undefined
+                                ? crypto.quote.USD.percent_change_24h.toFixed(2) + '%'
+                                : 'N/A'}
+                        </td>
+                        <td>
+                            {crypto.quote.USD.percent_change_7d !== undefined
+                                ? crypto.quote.USD.percent_change_7d.toFixed(2) + '%'
+                                : 'N/A'}
+                        </td>
+                        <td className="chart-container">
+                            <Line
+                                data={generateChartData(crypto)}
+                                options={{
+                                    ...options,
+                                    responsive: true
+                                }}
+                            />
+                        </td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>*/}
 
-            <div className="crypto-currencies-container">
-                <CryptoCurrencies />
-            </div>
-
+            <ReactPaginate
+                previousLabel={'Precedent'}
+                nextLabel={'Suivant'}
+                breakLabel={'...'}
+                pageCount={Math.ceil(cryptoData.length / itemsPerPage)}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={({ selected }) => setCurrentPage(selected)}
+                containerClassName={'pagination'}
+                activeClassName={'active'}
+            />
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Filter by</Modal.Title>
