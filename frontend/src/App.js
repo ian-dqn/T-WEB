@@ -7,6 +7,8 @@ import News from "../src/templates/News/Articles";
 import Edit from './components/User/Edit';
 import MyCrypto from "./components/MesCryptos";
 import DetailsCrypto from "./components/DetailsCrypto";
+import CryptoList from './components/User/CryptoList';
+import MesNews from './components/User/MesNews';
 
 function App() {
   const userString = localStorage.getItem('user');
@@ -21,20 +23,24 @@ function App() {
     return children
   };
   return (
-    <div className="App">
-      <BrowserRouter>
-        <NavBar />
-      <Routes>
-        <Route path='/' element={<Accueil/>} />
-        <Route path='/myCrypto' element={<MyCrypto/>} />
-        <Route path='/:coinId' element={<DetailsCrypto/>} />
-        <Route path='/news' element={<News user={user} />} />
-        <Route path='/login' element={<LoginUser />} />
-        <Route path='/register' element={<RegisterUser />} />
-        <Route path='/Edit/:id' element={<Edit />} />
-      </Routes>
-      </BrowserRouter>
-    </div>
+      <div className="App">
+        <BrowserRouter>
+          <NavBar />
+          <Routes>
+            <Route path='/' element={<Accueil/>} />
+            <Route path='/myCrypto' element={<MyCrypto/>} />
+            <Route path='/:coinId' element={<DetailsCrypto/>} />
+            <Route path='/news' element={<News user={user} />} />
+            <Route path='/login' element={<LoginUser />} />
+            <Route path='/register' element={<RegisterUser />} />
+            <Route path='/Edit/:id' element={<Edit />} />
+            <Route path="/mes-cryptos" element={<CryptoList />} />
+            <Route path="/articlesPrefs" element={<MesNews />} />
+
+
+          </Routes>
+        </BrowserRouter>
+      </div>
   );
 }
 

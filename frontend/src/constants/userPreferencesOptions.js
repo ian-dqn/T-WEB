@@ -1,13 +1,12 @@
-// export const cryptoOptions = ['Bitcoin', 'Ethereum', 'Litecoin', 'Ripple'];
 export const newsOptions = [
-    { value: "Analyse", label: "analyse" },
-    { value: "Affaires", label: "affaires" },
-    { value: "Évènements", label: "evenements" },
-    { value: "En Vedette", label: "en-vedette" },
-    { value: "Interview", label: "interview" },
-    { value: "Marchés", label: "marches" },
-    { value: "Avis", label: "avis" },
-    { value: "Politique et réglementation", label: "politique-et-reglementation" },
-    { value: "Sondages et rapports", label: "sondages-et-rapports" },
-    { value: "Communiqué de presse", label: "communique-de-presse" },
-      ];
+    { value: "analyse", label: "Analyse" },
+    { value: "affaires", label: "Affaires" },
+    { value: "evenements", label: "Évènements" },
+    { value: "en-vedette", label: "En Vedette" },
+    { value: "interview", label: "Interview" },
+    { value: "marches", label: "Marchés" },
+    { value: "avis", label: "Avis" },
+    { value: "politique-et-reglementation", label: "Politique et réglementation" },
+    { value: "sondages-et-rapports", label: "Sondages et rapports" },
+    { value: "communique-de-presse", label: "Communiqué de presse" },
+];

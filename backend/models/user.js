@@ -11,8 +11,9 @@ const userSchema = mongoose.Schema({
   },
   googleId: { type: String }, // Champ pour l'ID Google
   // We want array of strings
-  crypto: { type: [String], required: false, default: [] },
+  crypto: { type: [Number], required: false, default: [] },
   articlesPrefs: { type: [String], required: false, default: [] },
+  isAdmin:{type:Boolean,default:false}
 });
 
 userSchema.plugin(uniqueValidator);

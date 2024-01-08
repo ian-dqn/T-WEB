@@ -66,14 +66,16 @@ exports.putUser = (req, res, next) => {
 
     // Exemple : Récupération du nouveau mot de passe depuis le corps de la requête
     const newPassword = req.body.password;
-
+    const newPreferences = req.body.newsPref;
+    const crypto = req.body.crypto
+    console.log(crypto)
     // Hasher le nouveau mot de passe avant de le stocker
     bcrypt.hash(newPassword, 10)
         .then((hashedPassword) => {
             // Utilisez le mot de passe haché pour mettre à jour l'utilisateur
             User.findByIdAndUpdate(
                 userId,
-                { password: hashedPassword },
+                { password: hashedPassword, articlesPrefs: newPreferences,crypto:crypto },
                 { new: true, runValidators: true }
             )
                 .then((updatedUser) => {
