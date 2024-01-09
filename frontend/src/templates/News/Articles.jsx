@@ -4,8 +4,8 @@ import '../../asset/css/ArticleStyle.css';
 
 function DisplayArticle({ user }) {
     let apiUrl = 'http://localhost:4000/api/articles';
-    if (user && user.articlesPref) {
-        const param = user.articlesPref
+    if (user && user.articlesPrefs) {
+        const param = user.articlesPrefs
         apiUrl = `http://localhost:4000/api/articles?params=${param}`;
     }
     const { data, loading, error, reFetch } = useFetch(apiUrl);
