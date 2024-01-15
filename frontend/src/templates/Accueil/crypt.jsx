@@ -29,7 +29,6 @@ const CryptoCurrencies = () => {
                 console.error('Error fetching data:', error);
             }
         };
-
         fetchData();
     }, []);
 
@@ -145,12 +144,13 @@ const CryptoCurrencies = () => {
 
     const dataString = localStorage.getItem('data');
     const data = JSON.parse(dataString);
-    const token = data.token;
+    let isCryptoInUserList = []
 
-    const isCryptoInUserList = data.user.crypto
-
-    console.log(isCryptoInUserList)
-
+    if (data && data.user) {
+        const token = data.token;
+         isCryptoInUserList = data.user.crypto
+        console.log(isCryptoInUserList)
+    }
 
     return (
         <div>
