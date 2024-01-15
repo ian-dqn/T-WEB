@@ -74,7 +74,9 @@ const Edit = () => {
           toast.success('Votre profil a été mis à jour !', {
             position: toast.POSITION.TOP_RIGHT,
           });
-
+          const userDataString = localStorage.getItem('user');
+          const userData = JSON.parse(userDataString);
+          localStorage.setItem('user', JSON.stringify({ ...userData, crypto: values.crypto }));
           navigate("/")
         })
         .catch(err=>console.log(err))

@@ -2,6 +2,7 @@ const User = require('../models/user');
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const jwt = require('jsonwebtoken');
+const user = require('../models/user');
 
 exports.signup = (req, res, next) => {
     // console.log('user creation')
@@ -68,6 +69,8 @@ exports.putUser = (req, res, next) => {
     const newPassword = req.body.password;
     const newPreferences = req.body.newsPref;
     const crypto = req.body.crypto
+    const isAdmin = req.body.isAdmin
+    console.log('Received isAdmin:', isAdmin);
     console.log(crypto)
     // Hasher le nouveau mot de passe avant de le stocker
     bcrypt.hash(newPassword, 10)
@@ -75,7 +78,7 @@ exports.putUser = (req, res, next) => {
             // Utilisez le mot de passe haché pour mettre à jour l'utilisateur
             User.findByIdAndUpdate(
                 userId,
-                { password: hashedPassword, articlesPrefs: newPreferences,crypto:crypto },
+                { password: hashedPassword, articlesPrefs: newPreferences,crypto:crypto ,isAdmin: isAdmin},
                 { new: true, runValidators: true }
             )
                 .then((updatedUser) => {
@@ -109,4 +112,41 @@ exports.getUser = (req, res, next) => {
                 error: error,
             });
         });
+};
+exports.getAllUsers = async (req, res) => {
+    console.log("Début de la fonction getAllUsers");
+    try {
+      const users = await User.find();
+      res.status(200).json(users);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Erreur interne du serveur' });
+    }
+    console.log("Fin de la fonction getAllUsers");
+  };
+  exports.createUser = (req, res, next) => {
+    const { email, password, newsPref, crypto, isAdmin } = req.body;
+
+    bcrypt.hash(password, 10)
+        .then(hash => {
+            const user = new User({
+                email,
+                password: hash,
+                // Add any additional properties you need for user creation
+                articlesPrefs: newsPref,
+                crypto,
+                isAdmin,
+            });
+            user.save()
+                .then(() => res.status(201).json({ message: 'User created successfully!' }))
+                .catch(error => res.status(400).json({ error }));
+        })
+        .catch(error => res.status(500).json({ error }));
+};
+exports.isAdmin = (req, res, next) => {
+    // Check if the authenticated user is an admin
+    if (!req.user || !req.user.isAdmin) {
+        return res.status(403).json({ error: "Unauthorized: Admin access required." });
+    }
+    next();
 };

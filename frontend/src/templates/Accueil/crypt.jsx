@@ -6,6 +6,7 @@ import '../../asset/css/Paginate.css';
 import '../../asset/css/Accueil.css';
 import { Line } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
+import { colors } from 'react-select';
 
 
 const CryptoCurrencies = () => {
@@ -103,6 +104,7 @@ const CryptoCurrencies = () => {
         return cryptoData.slice(start, end);
     };
 
+
     const options = {
         scales: {
             x: {
@@ -139,77 +141,99 @@ const CryptoCurrencies = () => {
         };
     };
 
+
+
+    const dataString = localStorage.getItem('data');
+    const data = JSON.parse(dataString);
+    const token = data.token;
+
+    const isCryptoInUserList = data.user.crypto
+
+    console.log(isCryptoInUserList)
+
+
     return (
         <div>
             <table className="table table-dark">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col" onClick={() => handleSort('Nom')}>
-                        Nom
-                    </th>
-                    <th scope="col" onClick={() => handleSort('Symbole')}>
-                        Symbole
-                    </th>
-                    <th scope="col" onClick={() => handleSort('Prix')}>
-                        Prix
-                    </th>
-                    <th scope="col" onClick={() => handleSort('1h %')}>
-                        1h %
-                    </th>
-                    <th scope="col" onClick={() => handleSort('24h %')}>
-                        24h %
-                    </th>
-                    <th scope="col" onClick={() => handleSort('7j %')}>
-                        7j %
-                    </th>
-                    <th scope="col">Graphique</th>
-                </tr>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col" onClick={() => handleSort('Nom')}>
+                            Nom
+                        </th>
+                        <th scope="col" onClick={() => handleSort('Symbole')}>
+                            Symbole
+                        </th>
+                        <th scope="col" onClick={() => handleSort('Prix')}>
+                            Prix
+                        </th>
+                        <th scope="col" onClick={() => handleSort('1h %')}>
+                            1h %
+                        </th>
+                        <th scope="col" onClick={() => handleSort('24h %')}>
+                            24h %
+                        </th>
+                        <th scope="col" onClick={() => handleSort('7j %')}>
+                            7j %
+                        </th>
+                        <th scope="col">Graphique</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {displayedData().map((crypto, index) => (
-                    <tr key={crypto.id}>
-                        <td>{startIdx + index + 1}</td>
-                        <td>
-                            <a href={`http://localhost:3000/${crypto.id}`}>
-                                <img
-                                    src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`}
-                                    width={25}
-                                    alt={crypto.name}
-                                />
-                                {' '}
-                                {crypto.name}
-                            </a>
-                        </td>
+                    {displayedData().map((crypto, index) => (
+                        <tr key={crypto.id}>
+                            <td>{startIdx + index + 1}</td>
+                            <td>
+                                <button
+                                    className={`btn-startClick `}
+                                >
+                                    <>
+                                        {isCryptoInUserList.includes(crypto.id) ? (
+                                            <i className='fa-solid fa-star me-3'></i>
+                                        ) : (
+                                            ''
+                                        )}
+                                    </>
+                                </button>
+                                <a href={`http://localhost:3000/${crypto.id}`}>
+                                    <img
+                                        src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.id}.png`}
+                                        width={25}
+                                        alt={crypto.name}
+                                    />
+                                    {' '}
+                                    {crypto.name}
+                                </a>
+                            </td>
 
-                        <td>{crypto.symbol}</td>
-                        <td>{formatCurrency(crypto.quote.USD.price)}</td>
-                        <td>
-                            {crypto.quote.USD.percent_change_1h !== undefined
-                                ? crypto.quote.USD.percent_change_1h.toFixed(2) + '%'
-                                : 'N/A'}
-                        </td>
-                        <td>
-                            {crypto.quote.USD.percent_change_24h !== undefined
-                                ? crypto.quote.USD.percent_change_24h.toFixed(2) + '%'
-                                : 'N/A'}
-                        </td>
-                        <td>
-                            {crypto.quote.USD.percent_change_7d !== undefined
-                                ? crypto.quote.USD.percent_change_7d.toFixed(2) + '%'
-                                : 'N/A'}
-                        </td>
-                        <td className="chart-container">
-                            <Line
-                                data={generateChartData(crypto)}
-                                options={{
-                                    ...options,
-                                    responsive: true
-                                }}
-                            />
-                        </td>
-                    </tr>
-                ))}
+                            <td>{crypto.symbol}</td>
+                            <td>{formatCurrency(crypto.quote.USD.price)}</td>
+                            <td>
+                                {crypto.quote.USD.percent_change_1h !== undefined
+                                    ? crypto.quote.USD.percent_change_1h.toFixed(2) + '%'
+                                    : 'N/A'}
+                            </td>
+                            <td>
+                                {crypto.quote.USD.percent_change_24h !== undefined
+                                    ? crypto.quote.USD.percent_change_24h.toFixed(2) + '%'
+                                    : 'N/A'}
+                            </td>
+                            <td>
+                                {crypto.quote.USD.percent_change_7d !== undefined
+                                    ? crypto.quote.USD.percent_change_7d.toFixed(2) + '%'
+                                    : 'N/A'}
+                            </td>
+                            <td className="chart-container">
+                                <Line
+                                    data={generateChartData(crypto)}
+                                    options={{
+                                        ...options,
+                                        responsive: true
+                                    }}
+                                />
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
 

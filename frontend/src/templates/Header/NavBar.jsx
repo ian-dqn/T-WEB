@@ -41,97 +41,105 @@ function NavBar() {
   const user = userString ? JSON.parse(userString) : null;
 
   return (
-      <>
-        <nav className="navbar navbar-expand-lg navbar-dark px-2">
-          <a className="navbar-brand" href="/">
-            CryptoMarket
-          </a>
-          <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
+    <>
+      <nav className="navbar navbar-expand-lg navbar-dark px-2">
+        <a className="navbar-brand" href="/">
+          CryptoMarket
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <div className="navbar-nav mx-auto">
-              <Link
-                  className={`nav-item nav-link ms-5 ${location.pathname === "/" ? "active" : ""
-                  }`}
-                  to="/"
-              >
-                Cryptomonnaies <span className="sr-only">(current)</span>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="navbar-nav mx-auto">
+            <Link
+              className={`nav-item nav-link ms-5 ${location.pathname === "/" ? "active" : ""
+                }`}
+              to="/"
+            >
+              Cryptomonnaies <span className="sr-only">(current)</span>
+            </Link>
+            {user || userEmail ? (
+              <Link className={`nav-item nav-link ms-5 ${location.pathname === '/myCrypto' ? 'active' : ''}`} to="/myCrypto">
+                Mes Cryptos
               </Link>
-              {user || userEmail ? (
-                  <Link className={`nav-item nav-link ms-5 ${location.pathname === '/myCrypto' ? 'active' : ''}`} to="/myCrypto">
-                    Mes Cryptos
-                  </Link>
-              ):null}
+            ) : null}
+            <Link
+              className={`nav-item nav-link ms-5 ${location.pathname === "/news" ? "active" : ""
+                }`}
+              to="/news"
+            >
+              Actualités
+            </Link>
+            {user && user.isAdmin ? (
               <Link
-                  className={`nav-item nav-link ms-5 ${location.pathname === "/news" ? "active" : ""
-                  }`}
-                  to="/news"
+                className={`nav-item nav-link ms-5 ${location.pathname === "/dashborad" ? "active" : ""}`}
+                to="/dashboard"
               >
-                Actualités
+                Dashboard
               </Link>
-            </div>
+            ) : null}
+          </div>
 
-            {isLoggedIn ? (
-                <ul className="navbar-nav ml-auto">
-                  <li className="nav-item">
-                    <span className="nav-link">Bonjour, {userEmail}</span>
-                  </li>
-                  <li className="nav-item dropdown pe-2 d-flex align-items-center">
-                    <a  className="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src={profile} className="avatar avatar-sm me-2" alt="User" />
-                      <i className="fa fa-angle-down cursor-pointer"></i>
-                    </a>
-                    <ul className="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                      <li className="mb-2">
+          {isLoggedIn ? (
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <span className="nav-link">Bonjour, {userEmail}</span>
+              </li>
+              <li className="nav-item dropdown pe-2 d-flex align-items-center">
+                <a className="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src={profile} className="avatar avatar-sm me-2" alt="User" />
+                  <i className="fa fa-angle-down cursor-pointer"></i>
+                </a>
+                <ul className="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                  <li className="mb-2">
                     <span className="text-sm font-weight-normal mb-1">
                       {user && user._id ? (
-                          <Link className="fw-bold" to={`/edit/${user._id}`} style={{ color: "#0d1421" }}>
-                            Profil
-                          </Link>
+                        <Link className="fw-bold" to={`/edit/${user._id}`} style={{ color: "#0d1421" }}>
+                          Profil
+                        </Link>
                       ) : (
-                          <span className="fw-bold" style={{ color: "#0d1421" }}>
-                        Profil
-                      </span>
+                        <span className="fw-bold" style={{ color: "#0d1421" }}>
+                          Profil
+                        </span>
                       )}
                     </span>
-                      </li>
-                      <li>
+                  </li>
+                  <li>
                     <span className="text-sm font-weight-normal mb-1">
                       <button className="font-weight-bold border-button-logout" onClick={handleLogout}>
                         Se déconnecter
                       </button>
                     </span>
-                      </li>
-                    </ul>
                   </li>
                 </ul>
-            ) : (
-                <ul className="navbar-nav ml-auto">
-                  <li className="nav-item">
-                    <a className="nav-link nav-conn" href="/login">
-                      Se connecter
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link nav-ins" href="/register">
-                      S'inscrire
-                    </a>
-                  </li>
-                </ul>
-            )}
-          </div>
-        </nav>
-      </>
+              </li>
+            </ul>
+          ) : (
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <a className="nav-link nav-conn" href="/login">
+                  Se connecter
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link nav-ins" href="/register">
+                  S'inscrire
+                </a>
+              </li>
+            </ul>
+          )}
+        </div>
+      </nav>
+    </>
   );
 }
 

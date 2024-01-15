@@ -129,73 +129,79 @@ const CryptoList = () => {
     return (
         <>
             <div className='container'>
-                <table className="table table-dark">
+                {
+                    cryptoData.length === 0 ? (
+                        <p>No cryptocurrencies available.</p>
+                    ) : (
+                        <table className="table table-dark">
 
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col" onClick={() => handleSort('Nom')}>
-                            Nom
-                        </th>
-                        <th scope="col" onClick={() => handleSort('Symbole')}>
-                            Symbole
-                        </th>
-                        <th scope="col" onClick={() => handleSort('Prix')}>
-                            Prix
-                        </th>
-                        <th scope="col" onClick={() => handleSort('1h %')}>
-                            1h %
-                        </th>
-                        <th scope="col" onClick={() => handleSort('24h %')}>
-                            24h %
-                        </th>
-                        <th scope="col" onClick={() => handleSort('7j %')}>
-                            7j %
-                        </th>
-                        <th scope="col">Graphique</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {cryptoData.map((crypto, index) => (
-                        <tr key={index}>
-                            {console.log(crypto.data.data[crypto.cryptoId])}
-                            <td>{startIdx + index + 1}</td>
-                            <td>  <img src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.cryptoId}.png`}
-                                       width={25}
-                                       alt={crypto.name}
-                            />   {crypto.name}</td>
-                            <td>{crypto.data.data[crypto.cryptoId].symbol}</td>
-                            <td>{formatCurrency(crypto.data.data[crypto.cryptoId].quote.USD.price)}</td>
-                            <td>
-                                {crypto.data.data[crypto.cryptoId].quote.USD.percent_change_1h !== undefined
-                                    ? crypto.data.data[crypto.cryptoId].quote.USD.percent_change_1h.toFixed(2) + '%'
-                                    : 'N/A'}
-                            </td>
-                            <td>
-                                {crypto.data.data[crypto.cryptoId].quote.USD.percent_change_24h !== undefined
-                                    ? crypto.data.data[crypto.cryptoId].quote.USD.percent_change_24h.toFixed(2) + '%'
-                                    : 'N/A'}
-                            </td>
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col" onClick={() => handleSort('Nom')}>
+                                        Nom
+                                    </th>
+                                    <th scope="col" onClick={() => handleSort('Symbole')}>
+                                        Symbole
+                                    </th>
+                                    <th scope="col" onClick={() => handleSort('Prix')}>
+                                        Prix
+                                    </th>
+                                    <th scope="col" onClick={() => handleSort('1h %')}>
+                                        1h %
+                                    </th>
+                                    <th scope="col" onClick={() => handleSort('24h %')}>
+                                        24h %
+                                    </th>
+                                    <th scope="col" onClick={() => handleSort('7j %')}>
+                                        7j %
+                                    </th>
+                                    <th scope="col">Graphique</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {cryptoData.map((crypto, index) => (
+                                    <tr key={index}>
+                                        {/* {console.log(crypto.data.data[crypto.cryptoId])} */}
+                                        <td>{startIdx + index + 1}</td>
+                                        <td>  <img src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${crypto.cryptoId}.png`}
+                                            width={25}
+                                            alt={crypto.name}
+                                        />   {crypto.name}</td>
+                                        <td>{crypto.data.data[crypto.cryptoId].symbol}</td>
+                                        <td>{formatCurrency(crypto.data.data[crypto.cryptoId].quote.USD.price)}</td>
+                                        <td>
+                                            {crypto.data.data[crypto.cryptoId].quote.USD.percent_change_1h !== undefined
+                                                ? crypto.data.data[crypto.cryptoId].quote.USD.percent_change_1h.toFixed(2) + '%'
+                                                : 'N/A'}
+                                        </td>
+                                        <td>
+                                            {crypto.data.data[crypto.cryptoId].quote.USD.percent_change_24h !== undefined
+                                                ? crypto.data.data[crypto.cryptoId].quote.USD.percent_change_24h.toFixed(2) + '%'
+                                                : 'N/A'}
+                                        </td>
 
-                            <td>
-                                {crypto.data.data[crypto.cryptoId].quote.USD.percent_change_7d !== undefined
-                                    ? crypto.data.data[crypto.cryptoId].quote.USD.percent_change_7d.toFixed(2) + '%'
-                                    : 'N/A'}
-                            </td>
-                            <td className="chart-container">
-                                <Line
-                                    data={generateChartData(crypto)}
-                                    options={{
-                                        ...options,
-                                        responsive: true
-                                    }}
-                                />
-                            </td>
-                            {/* Ajoutez d'autres cellules de données si nécessaire */}
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
+                                        <td>
+                                            {crypto.data.data[crypto.cryptoId].quote.USD.percent_change_7d !== undefined
+                                                ? crypto.data.data[crypto.cryptoId].quote.USD.percent_change_7d.toFixed(2) + '%'
+                                                : 'N/A'}
+                                        </td>
+                                        <td className="chart-container">
+                                            <Line
+                                                data={generateChartData(crypto)}
+                                                options={{
+                                                    ...options,
+                                                    responsive: true
+                                                }}
+                                            />
+                                        </td>
+                                        {/* Ajoutez d'autres cellules de données si nécessaire */}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    )
+                }
             </div>
         </>
     );

@@ -180,6 +180,18 @@ table {
     width: 48px;
     transition: all .2s ease-in-out;
 }
+.btn-startClick {
+    cursor: pointer;
+    background-color: transparent;
+
+}
+.btn-startClick:hover {
+    cursor: pointer;
+    background-color: transparent;
+
+
+}
+
 
 .avatar img {
     width: 100%;

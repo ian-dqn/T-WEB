@@ -170,6 +170,7 @@ const Details = () => {
                     <tr key={crypto.id}>
                         <td>{startIdx + index + 1}</td>
                         <td>
+                        <i className="fa-regular fa-star me-5"></i>
                             <img
                                 src={'https://s2.coinmarketcap.com/static/img/coins/64x64/' + crypto.id + '.png'}
                                 width={25}

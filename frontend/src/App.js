@@ -9,6 +9,9 @@ import MyCrypto from "./components/MesCryptos";
 import DetailsCrypto from "./components/DetailsCrypto";
 import CryptoList from './components/User/CryptoList';
 import MesNews from './components/User/MesNews';
+import Dashborad from './components/User/Admin/Dashborad'
+import EditeUser from './components/User/Admin/EditeUser';
+import AddUser from './components/User/Admin/AddUser';
 
 function App() {
   const userString = localStorage.getItem('user');
@@ -36,6 +39,10 @@ function App() {
             <Route path='/Edit/:id' element={<Edit />} />
             <Route path="/mes-cryptos" element={<CryptoList />} />
             <Route path="/articlesPrefs" element={<MesNews />} />
+            <Route path='/dashboard' element={<Dashborad />} />
+            <Route path='/dashboard/edit-user/:id' element={<EditeUser />} />
+            <Route path='/dashboard/add-user' element={<AddUser />} />
+      
 
 
           </Routes>
